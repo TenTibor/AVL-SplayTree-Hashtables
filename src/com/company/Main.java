@@ -4,20 +4,23 @@ public class Main {
 
     public static void main(String[] args) {
         Item root = null;
-        root = addItem(root, new Item("Ahoj"));
-        root = addItem(root, new Item("Moja"));
+        root = addItem(root, new Item("ahob"));
+        root = addItem(root, new Item("ahoa"));
+        root = addItem(root, new Item("ahoc"));
         printTree(root);
     }
 
-    //
-    public static Item addItem(Item root, Item item) {
-        if (root == null)
-            root = item;
-        else {
-            root.right = item;
+    public static Item addItem(Item addTo, Item addThis) {
+        //If first item
+        if (addTo == null)
+            addTo = addThis;
+        else if (addTo.getName().compareTo(addThis.getName()) < 0) {
+            addTo.right = addThis;
+        } else if (addTo.getName().compareTo(addThis.getName()) > 0) {
+            addTo.left = addThis;
         }
 
-        return root;
+        return addTo;
     }
 
     public static void printTree(Item root) {
