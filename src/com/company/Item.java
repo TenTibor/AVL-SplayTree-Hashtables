@@ -1,10 +1,10 @@
 package com.company;
 
 public class Item {
-    String name; // ID
+    String name = null; // ID
     int depth;
-    Item left;
-    Item right;
+    Item left = null;
+    Item right = null;
 
     public Item(String name) {
         this.name = name;

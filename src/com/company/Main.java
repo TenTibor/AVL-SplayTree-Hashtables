@@ -6,8 +6,7 @@ public class Main {
         Item root = null;
         root = addItem(root, new Item("Ahoj"));
         root = addItem(root, new Item("Moja"));
-        root = addItem(root, new Item("Tvoja"));
-        System.out.println(root.getName());
+        printTree(root);
     }
 
     //
@@ -15,9 +14,18 @@ public class Main {
         if (root == null)
             root = item;
         else {
-
+            root.right = item;
         }
 
         return root;
+    }
+
+    public static void printTree(Item root) {
+        Item thisItem = root;
+        if (thisItem != null) {
+            System.out.println(root.getName() + "->" + (thisItem.left != null ? thisItem.left.getName() : "[none]") + "/" + (thisItem.right != null ? thisItem.right.getName() : "[none]"));
+            printTree(thisItem.left);
+            printTree(thisItem.right);
+        }
     }
 }
