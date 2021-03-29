@@ -2,7 +2,7 @@ package com.company;
 
 public class Item {
     String name = null; // ID
-    int depth;
+    int depth = 1;
     Item left = null;
     Item right = null;
 
@@ -16,6 +16,10 @@ public class Item {
 
     public void setDepth(int depth) {
         this.depth = depth;
+    }
+
+    public void increaseDepth() {
+        this.depth++;
     }
 
     public Item getLeft() {
