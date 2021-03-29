@@ -6,6 +6,29 @@ public class Item {
     Item left = null;
     Item right = null;
 
+    public Item getBiggerItem() {
+        if (this.right == null) {
+            if (this.left == null) {
+                return null;
+            }
+            return this.left;
+        } else if (this.left == null) {
+            return this.right;
+        }
+
+        if (this.right.getDepth() > this.left.getDepth())
+            return this.right;
+        else
+            return this.left;
+
+    }
+
+    public void refreshDepth() {
+        Item biggerItem = this.getBiggerItem();
+        if (biggerItem != null)
+            this.setDepth(biggerItem.getDepth() + 1);
+    }
+
     public Item(String name) {
         this.name = name;
     }

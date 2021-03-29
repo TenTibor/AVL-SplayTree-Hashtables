@@ -13,15 +13,19 @@ public class Main {
     }
 
     public static Item addItem(Item addTo, Item addThis) {
-        //If first item
+        //If this item is empty
         if (addTo == null)
             addTo = addThis;
+
+            // Else continue in tree
         else if (addTo.getName().compareTo(addThis.getName()) < 0) {
             addTo.right = addItem(addTo.right, addThis);
         } else if (addTo.getName().compareTo(addThis.getName()) > 0) {
             addTo.left = addItem(addTo.left, addThis);
         }
-        addTo.increaseDepth();
+
+        // set new depth
+        addTo.refreshDepth();
 
         return addTo;
     }
@@ -29,7 +33,7 @@ public class Main {
     public static void printTree(Item root) {
         Item thisItem = root;
         if (thisItem != null) {
-            System.out.println(root.getName() + "->" + (thisItem.left != null ? thisItem.left.getName() : "[none]") + "/" + (thisItem.right != null ? thisItem.right.getName() : "[none]"));
+            System.out.println(root.getName() + "(" + thisItem.getDepth() + ")->" + (thisItem.left != null ? thisItem.left.getName() : "[none]") + "/" + (thisItem.right != null ? thisItem.right.getName() : "[none]"));
             printTree(thisItem.left);
             printTree(thisItem.right);
         }
