@@ -27,6 +27,16 @@ public class Main {
         // set new depth
         addTo.refreshDepth();
 
+        // check if was rotation
+
+//        Right rotation with depth one
+        if (addTo.right != null && addTo.right.rotated > 0) {
+            addTo.right.setDepth(1);
+            Item tempItem = addTo.right.right;
+            addTo.right.right = null;
+            addTo.right = tempItem;
+        }
+
         return addTo;
     }
 

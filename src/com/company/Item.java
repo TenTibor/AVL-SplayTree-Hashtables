@@ -6,6 +6,10 @@ public class Item {
     Item left = null;
     Item right = null;
 
+    int rotated = 0;
+    // +1 -> rotated to right
+    // -1 -> rotated to left
+
     public Item getBiggerItem() {
         if (this.right == null) {
             if (this.left == null) {
@@ -27,6 +31,21 @@ public class Item {
         Item biggerItem = this.getBiggerItem();
         if (biggerItem != null)
             this.setDepth(biggerItem.getDepth() + 1);
+
+        // Need rotation?
+        if (left == null && (right != null && right.getDepth() > 1)) {
+            // Right need rotate
+            System.out.println("Right need to rotate:" + name);
+            right.left = this;
+            rotated = 1;
+
+        } else if (right == null && (left != null && left.getDepth() > 1)) {
+            System.out.println("left need to rotate");
+            // Left need rotate
+        } else if ((left != null && right != null) && Math.abs(left.getDepth() - right.getDepth()) > 1) {
+            System.out.println("Some side need to rotate");
+            // One seed need rotate
+        }
     }
 
     public Item(String name) {
@@ -43,6 +62,10 @@ public class Item {
 
     public void increaseDepth() {
         this.depth++;
+    }
+
+    public void decreaseDepth() {
+        this.depth--;
     }
 
     public Item getLeft() {
