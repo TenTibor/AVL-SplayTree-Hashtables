@@ -33,7 +33,14 @@ public class Item {
             this.setDepth(biggerItem.getDepth() + 1);
 
         // Need rotation?
-        if (left == null && (right != null && right.getDepth() > 1)) {
+        // zigzag wild rotation
+        if (left == null && (right != null && right.getDepth() > 1) && right.left != null) {
+            right.left.left = this;
+            right.left.right = right;
+            this.rotated = 2;
+            System.out.println("Right zigzag need to rotate:" + name);
+
+        } else if (left == null && (right != null && right.getDepth() > 1)) {
             // Right need rotate
             System.out.println("Right need to rotate:" + name);
             right.left = this;

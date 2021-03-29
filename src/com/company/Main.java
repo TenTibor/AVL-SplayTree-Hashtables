@@ -6,14 +6,18 @@ public class Main {
 
 //        String[] testWords = {"1", "10", "5"};
 //        String[] testWords = {"d", "a", "f", "g", "h"};
-        String[] testWords = {"a", "b", "c"};
-//        , "20", "1", "2"
+        String[] testWords = {"s", "a", "x", "d"};
+//        String[] testWords = {"s", "a", "x", "d", "b"}; //TODO b is not showing
+//        String[] testWords = {"a", "b", "c"};
 
         Item root = null;
         for (String word : testWords) {
             root = addItem(root, new Item(word));
         }
 
+        printTree(root);
+        System.out.println("===========");
+        root = addItem(root, new Item("b"));
         printTree(root);
     }
 
@@ -39,13 +43,23 @@ public class Main {
             Item tempItem = null;
 //            System.out.println(addTo.rotated);
             if (addTo.rotated > 0) {
-//                System.out.println("THIS IS NOT HAPPENING");
-                addTo.setDepth(addTo.right.getDepth() - 1);
-                tempItem = addTo.right;
-                addTo.right = null;
+                if (addTo.rotated == 2) {
+                    addTo.setDepth(addTo.right.left.getDepth());
+                    addTo.right.left.increaseDepth();
+                    addTo.right.decreaseDepth();
+                    tempItem = addTo.right.left;
+                    addTo.right.left = null;
+                    addTo.right = null;
+                } else {
+                    System.out.println("im here");
+                    addTo.setDepth(addTo.right.getDepth() - 1);
+                    tempItem = addTo.right;
+                    addTo.right = null;
+                }
 
                 // Left rotation with depth one
             } else if (addTo.rotated < 0) {
+                System.out.println("im here");
                 addTo.setDepth(addTo.left.getDepth() - 1);
                 tempItem = addTo.left;
                 addTo.left = null;
@@ -58,12 +72,14 @@ public class Main {
             // Right rotation with depth one
             Item tempItem = null;
             if (addTo.rotated > 0) {
+                System.out.println("im here");
                 addTo.setDepth(addTo.right.getDepth() - 1);
                 tempItem = addTo.right;
                 addTo.right = null;
 
                 // Left rotation with depth one
             } else if (addTo.rotated < 0) {
+                System.out.println("im here");
                 addTo.setDepth(addTo.left.getDepth() - 1);
                 tempItem = addTo.left;
                 addTo.left = null;
