@@ -3,12 +3,14 @@ package com.company;
 public class Main {
 
     public static void main(String[] args) {
+
+        String[] testWords = {"5", "0", "9", "8", "7", "20", "1", "2"};
+
         Item root = null;
-        root = addItem(root, new Item("5"));
-        root = addItem(root, new Item("0"));
-        root = addItem(root, new Item("9"));
-        root = addItem(root, new Item("8"));
-        root = addItem(root, new Item("7"));
+        for (String word:testWords) {
+            root = addItem(root, new Item(word));
+        }
+
         printTree(root);
     }
 
