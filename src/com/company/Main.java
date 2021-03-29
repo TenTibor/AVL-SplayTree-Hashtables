@@ -4,10 +4,12 @@ public class Main {
 
     public static void main(String[] args) {
 
-        String[] testWords = {"5", "0", "9", "8", "7", "20", "1", "2"};
+//        String[] testWords = {"1", "10", "5"};
+        String[] testWords = {"d", "a", "f", "g", "h"};
+//        , "20", "1", "2"
 
         Item root = null;
-        for (String word:testWords) {
+        for (String word : testWords) {
             root = addItem(root, new Item(word));
         }
 

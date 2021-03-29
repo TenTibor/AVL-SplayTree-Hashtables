@@ -38,15 +38,14 @@ public class Item {
             System.out.println("Right need to rotate:" + name);
             right.left = this;
             rotated = 1;
-
         } else if (right == null && (left != null && left.getDepth() > 1)) {
             // Left need rotate
             System.out.println("Left need to rotate:" + name);
             left.right = this;
             rotated = -1;
-        } else if ((left != null && right != null) && Math.abs(left.getDepth() - right.getDepth()) > 1) {
-            System.out.println("Some side need to rotate");
-            // One seed need rotate
+        } else if ((left != null && right != null) && (left.rotated == 0 && right.rotated == 0) && Math.abs(left.getDepth() - right.getDepth()) > 1) {
+            // One side need rotate
+            System.out.println("Some side need to rotate: " + name + "//sides:" + left.getDepth() + "/" + right.getDepth());
         }
     }
 
