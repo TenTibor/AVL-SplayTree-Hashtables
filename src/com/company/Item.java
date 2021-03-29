@@ -37,7 +37,7 @@ public class Item {
             // Right need rotate
             System.out.println("Right need to rotate:" + name);
             right.left = this;
-            rotated = 1;
+            this.rotated = 1;
         } else if (right == null && (left != null && left.getDepth() > 1)) {
             // Left need rotate
             System.out.println("Left need to rotate:" + name);
