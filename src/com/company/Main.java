@@ -5,10 +5,10 @@ public class Main {
     public static void main(String[] args) {
         Item root = null;
         root = addItem(root, new Item("5"));
-        root = addItem(root, new Item("4"));
-        root = addItem(root, new Item("6"));
-        root = addItem(root, new Item("7"));
+        root = addItem(root, new Item("0"));
+        root = addItem(root, new Item("9"));
         root = addItem(root, new Item("8"));
+        root = addItem(root, new Item("7"));
         printTree(root);
     }
 
@@ -29,11 +29,18 @@ public class Main {
 
         // check if was rotation
 
-//        Right rotation with depth one
+        // Right rotation with depth one
         if (addTo.right != null && addTo.right.rotated > 0) {
             addTo.right.setDepth(1);
             Item tempItem = addTo.right.right;
             addTo.right.right = null;
+            addTo.right = tempItem;
+
+        // Left rotation with depth one
+        } else if (addTo.right != null && addTo.right.rotated < 0) {
+            addTo.right.setDepth(1);
+            Item tempItem = addTo.right.left;
+            addTo.right.left = null;
             addTo.right = tempItem;
         }
 

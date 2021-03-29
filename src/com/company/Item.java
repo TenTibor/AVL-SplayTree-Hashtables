@@ -40,8 +40,10 @@ public class Item {
             rotated = 1;
 
         } else if (right == null && (left != null && left.getDepth() > 1)) {
-            System.out.println("left need to rotate");
             // Left need rotate
+            System.out.println("Left need to rotate:" + name);
+            left.right = this;
+            rotated = -1;
         } else if ((left != null && right != null) && Math.abs(left.getDepth() - right.getDepth()) > 1) {
             System.out.println("Some side need to rotate");
             // One seed need rotate
