@@ -29,28 +29,48 @@ public class Main {
 
         // check if was rotation
 
-        // Right rotation with depth one
-        if (addTo.right != null && addTo.right.rotated > 0) {
-            addTo.right.setDepth(1);
-            Item tempItem = addTo.right.right;
-            addTo.right.right = null;
-            addTo.right = tempItem;
+        // Check right side
+        if (addTo.right != null) {
+            // Right rotation with depth one
+            Item tempItem = null;
+            if (addTo.right.rotated > 0) {
+                addTo.right.setDepth(addTo.right.right.getDepth() - 1);
+                tempItem = addTo.right.right;
+                addTo.right.right = null;
 
-        // Left rotation with depth one
-        } else if (addTo.right != null && addTo.right.rotated < 0) {
-            addTo.right.setDepth(1);
-            Item tempItem = addTo.right.left;
-            addTo.right.left = null;
-            addTo.right = tempItem;
+                // Left rotation with depth one
+            } else if (addTo.right.rotated < 0) {
+                addTo.right.setDepth(addTo.right.left.getDepth() - 1);
+                tempItem = addTo.right.left;
+                addTo.right.left = null;
+            }
+            if (tempItem != null) addTo.right = tempItem;
+        }
+
+        // Check left side
+        if (addTo.left != null) {
+            // Right rotation with depth one
+            Item tempItem = null;
+            if (addTo.left.rotated > 0) {
+                addTo.left.setDepth(addTo.left.right.getDepth() - 1);
+                tempItem = addTo.left.right;
+                addTo.left.right = null;
+
+                // Left rotation with depth one
+            } else if (addTo.left.rotated < 0) {
+                addTo.left.setDepth(addTo.left.left.getDepth() - 1);
+                tempItem = addTo.left.left;
+                addTo.left.left = null;
+            }
+            if (tempItem != null) addTo.left = tempItem;
         }
 
         return addTo;
     }
 
-    public static void printTree(Item root) {
-        Item thisItem = root;
+    public static void printTree(Item thisItem) {
         if (thisItem != null) {
-            System.out.println(root.getName() + "(" + thisItem.getDepth() + ")->" + (thisItem.left != null ? thisItem.left.getName() : "[none]") + "/" + (thisItem.right != null ? thisItem.right.getName() : "[none]"));
+            System.out.println(thisItem.getName() + "(" + thisItem.getDepth() + ")->" + (thisItem.left != null ? thisItem.left.getName() : "[none]") + "/" + (thisItem.right != null ? thisItem.right.getName() : "[none]"));
             printTree(thisItem.left);
             printTree(thisItem.right);
         }
