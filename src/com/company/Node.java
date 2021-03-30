@@ -38,9 +38,10 @@ public class Node {
         if (left != null) balance += left.depth;
         if (right != null) balance -= right.depth;
 
+        if (left != null) System.out.println(balance + "/" + left.balance);
 
         // Left and right rotation after this
-        if (balance > 1 && left != null && left.balance < 0) {
+        if (balance > 1 && left != null && left.balance > 0) {
             System.out.println(this.name + " need left-right rotation with: " + left.getName() + '/' + left.right.getName());
 
             // left rotation of left node
@@ -65,6 +66,7 @@ public class Node {
 
         // Right rotation
         if (balance > 1) {
+            balance = 0;
             System.out.println(this.name + " need right rotation");
             left.right = this;
             Node tempNode = left;
@@ -74,6 +76,7 @@ public class Node {
 
         // Left rotation
         if (balance < -1) {
+            balance = 0;
             System.out.println(this.name + " need left rotation");
             right.left = this;
             Node tempNode = right;
