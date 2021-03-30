@@ -12,9 +12,9 @@ public class Main {
         String[] testWords = {"c", "a", "0", "b", "d"};
 //        String[] testWords = {"a", "b", "c"};
 
-        Item root = null;
+        Node root = null;
         for (String word : testWords) {
-            root = addItem(root, new Item(word));
+            root = addItem(root, new Node(word));
         }
 
         printTree(root);
@@ -23,7 +23,7 @@ public class Main {
 //        printTree(root);
     }
 
-    public static Item addItem(Item addTo, Item addThis) {
+    public static Node addItem(Node addTo, Node addThis) {
         //If this item is empty
         if (addTo == null)
             addTo = addThis;
@@ -42,20 +42,20 @@ public class Main {
         // Check right side
         if (addTo.right != null) {
             // Right rotation with depth one
-            Item tempItem = null;
+            Node tempNode = null;
 //            System.out.println(addTo.rotated);
             if (addTo.rotated > 0) {
                 if (addTo.rotated == 2) {
                     addTo.setDepth(addTo.right.left.getDepth());
                     addTo.right.left.increaseDepth();
                     addTo.right.decreaseDepth();
-                    tempItem = addTo.right.left;
+                    tempNode = addTo.right.left;
                     addTo.right.left = null;
                     addTo.right = null;
                 } else {
                     System.out.println("im here");
                     addTo.setDepth(addTo.right.getDepth() - 1);
-                    tempItem = addTo.right;
+                    tempNode = addTo.right;
                     addTo.right = null;
                 }
 
@@ -63,40 +63,40 @@ public class Main {
             } else if (addTo.rotated < 0) {
                 System.out.println("im here");
                 addTo.setDepth(addTo.left.getDepth() - 1);
-                tempItem = addTo.left;
+                tempNode = addTo.left;
                 addTo.left = null;
             }
-            if (tempItem != null) addTo = tempItem;
+            if (tempNode != null) addTo = tempNode;
         }
 
         // Check left side
         else if (addTo.left != null) {
             // Right rotation with depth one
-            Item tempItem = null;
+            Node tempNode = null;
             if (addTo.rotated > 0) {
                 System.out.println("im here");
                 addTo.setDepth(addTo.right.getDepth() - 1);
-                tempItem = addTo.right;
+                tempNode = addTo.right;
                 addTo.right = null;
 
                 // Left rotation with depth one
             } else if (addTo.rotated < 0) {
                 System.out.println("im here");
                 addTo.setDepth(addTo.left.getDepth() - 1);
-                tempItem = addTo.left;
+                tempNode = addTo.left;
                 addTo.left = null;
             }
-            if (tempItem != null) addTo = tempItem;
+            if (tempNode != null) addTo = tempNode;
         }
 
         return addTo;
     }
 
-    public static void printTree(Item thisItem) {
-        if (thisItem != null) {
-            System.out.println(thisItem.getName() + "(" + thisItem.balance + "/" + thisItem.getDepth() + ")->" + (thisItem.left != null ? thisItem.left.getName() : "[none]") + "/" + (thisItem.right != null ? thisItem.right.getName() : "[none]"));
-            printTree(thisItem.left);
-            printTree(thisItem.right);
+    public static void printTree(Node thisNode) {
+        if (thisNode != null) {
+            System.out.println(thisNode.getName() + "(" + thisNode.balance + "/" + thisNode.getDepth() + ")->" + (thisNode.left != null ? thisNode.left.getName() : "[none]") + "/" + (thisNode.right != null ? thisNode.right.getName() : "[none]"));
+            printTree(thisNode.left);
+            printTree(thisNode.right);
         }
     }
 }

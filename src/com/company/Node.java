@@ -1,17 +1,17 @@
 package com.company;
 
-public class Item {
+public class Node {
     String name = null; // ID
     int depth = 1;
     int balance = 0;
-    Item left = null;
-    Item right = null;
+    Node left = null;
+    Node right = null;
 
     int rotated = 0;
     // +1 -> rotated to right
     // -1 -> rotated to left
 
-    public Item getBiggerItem() {
+    public Node getBiggerItem() {
         if (this.right == null) {
             if (this.left == null) {
                 return null;
@@ -29,9 +29,9 @@ public class Item {
 
     public void refreshBalance() {
         // Refresh depth
-        Item biggerItem = this.getBiggerItem();
-        if (biggerItem != null)
-            this.setDepth(biggerItem.getDepth() + 1);
+        Node biggerNode = this.getBiggerItem();
+        if (biggerNode != null)
+            this.setDepth(biggerNode.getDepth() + 1);
 
         // Refresh balance
         balance = 0;
@@ -73,7 +73,7 @@ public class Item {
         }*/
     }
 
-    public Item(String name) {
+    public Node(String name) {
         this.name = name;
     }
 
@@ -93,19 +93,19 @@ public class Item {
         this.depth--;
     }
 
-    public Item getLeft() {
+    public Node getLeft() {
         return left;
     }
 
-    public void setLeft(Item left) {
+    public void setLeft(Node left) {
         this.left = left;
     }
 
-    public Item getRight() {
+    public Node getRight() {
         return right;
     }
 
-    public void setRight(Item right) {
+    public void setRight(Node right) {
         this.right = right;
     }
 
