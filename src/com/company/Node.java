@@ -27,7 +27,7 @@ public class Node {
             return this.left;
     }
 
-    public void refreshBalance() {
+    public Node refreshBalance() {
         // Refresh depth
         Node biggerNode = this.getBiggerItem();
         if (biggerNode != null)
@@ -37,6 +37,21 @@ public class Node {
         balance = 0;
         if (left != null) balance += left.depth;
         if (right != null) balance -= right.depth;
+
+
+        // Right rotation
+        if (Math.abs(balance) > 1) {
+            System.out.println(this.name + " need rotation");
+            if (balance > 1) {
+                left.right = this;
+                Node tempNode = left;
+                left = null;
+                return tempNode;
+            }
+        }
+
+
+        return this;
         // Need rotation?
         // zigzag wild rotation
        /* if (left == null && (right != null && right.getDepth() > 1) && right.left != null) {

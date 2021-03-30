@@ -9,7 +9,7 @@ public class Main {
 //        String[] testWords = {"s", "a", "x", "d"};
 //        String[] testWords = {"s", "a", "x", "d", "b"};
 //        String[] testWords = {"s", "a", "x", "d", "b","c", "g", "h", "j", "z"}; //TODO fix this
-        String[] testWords = {"c", "a", "0", "b", "d"};
+        String[] testWords = {"c", "b", "a", "d"};
 //        String[] testWords = {"a", "b", "c"};
 
         Node root = null;
@@ -36,58 +36,58 @@ public class Main {
         }
 
         // set new balance
-        addTo.refreshBalance();
+        addTo = addTo.refreshBalance();
 
         // check if was rotation
         // Check right side
-        if (addTo.right != null) {
-            // Right rotation with depth one
-            Node tempNode = null;
-//            System.out.println(addTo.rotated);
-            if (addTo.rotated > 0) {
-                if (addTo.rotated == 2) {
-                    addTo.setDepth(addTo.right.left.getDepth());
-                    addTo.right.left.increaseDepth();
-                    addTo.right.decreaseDepth();
-                    tempNode = addTo.right.left;
-                    addTo.right.left = null;
-                    addTo.right = null;
-                } else {
-                    System.out.println("im here");
-                    addTo.setDepth(addTo.right.getDepth() - 1);
-                    tempNode = addTo.right;
-                    addTo.right = null;
-                }
-
-                // Left rotation with depth one
-            } else if (addTo.rotated < 0) {
-                System.out.println("im here");
-                addTo.setDepth(addTo.left.getDepth() - 1);
-                tempNode = addTo.left;
-                addTo.left = null;
-            }
-            if (tempNode != null) addTo = tempNode;
-        }
-
-        // Check left side
-        else if (addTo.left != null) {
-            // Right rotation with depth one
-            Node tempNode = null;
-            if (addTo.rotated > 0) {
-                System.out.println("im here");
-                addTo.setDepth(addTo.right.getDepth() - 1);
-                tempNode = addTo.right;
-                addTo.right = null;
-
-                // Left rotation with depth one
-            } else if (addTo.rotated < 0) {
-                System.out.println("im here");
-                addTo.setDepth(addTo.left.getDepth() - 1);
-                tempNode = addTo.left;
-                addTo.left = null;
-            }
-            if (tempNode != null) addTo = tempNode;
-        }
+//        if (addTo.right != null) {
+//            // Right rotation with depth one
+//            Node tempNode = null;
+////            System.out.println(addTo.rotated);
+//            if (addTo.rotated > 0) {
+//                if (addTo.rotated == 2) {
+//                    addTo.setDepth(addTo.right.left.getDepth());
+//                    addTo.right.left.increaseDepth();
+//                    addTo.right.decreaseDepth();
+//                    tempNode = addTo.right.left;
+//                    addTo.right.left = null;
+//                    addTo.right = null;
+//                } else {
+//                    System.out.println("im here");
+//                    addTo.setDepth(addTo.right.getDepth() - 1);
+//                    tempNode = addTo.right;
+//                    addTo.right = null;
+//                }
+//
+//                // Left rotation with depth one
+//            } else if (addTo.rotated < 0) {
+//                System.out.println("im here");
+//                addTo.setDepth(addTo.left.getDepth() - 1);
+//                tempNode = addTo.left;
+//                addTo.left = null;
+//            }
+//            if (tempNode != null) addTo = tempNode;
+//        }
+//
+//        // Check left side
+//        else if (addTo.left != null) {
+//            // Right rotation with depth one
+//            Node tempNode = null;
+//            if (addTo.rotated > 0) {
+//                System.out.println("im here");
+//                addTo.setDepth(addTo.right.getDepth() - 1);
+//                tempNode = addTo.right;
+//                addTo.right = null;
+//
+//                // Left rotation with depth one
+//            } else if (addTo.rotated < 0) {
+//                System.out.println("im here");
+//                addTo.setDepth(addTo.left.getDepth() - 1);
+//                tempNode = addTo.left;
+//                addTo.left = null;
+//            }
+//            if (tempNode != null) addTo = tempNode;
+//        }
 
         return addTo;
     }
