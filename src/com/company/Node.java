@@ -27,7 +27,7 @@ public class Node {
             return this.left;
     }
 
-    public Node refreshBalance() {
+    public Node rebalanced() {
         // Refresh depth
         Node biggerNode = this.getBiggerItem();
         if (biggerNode != null)
@@ -39,9 +39,20 @@ public class Node {
         if (right != null) balance -= right.depth;
 
 
+        // Left and right rotation
+        if (balance > 1 && left != null && left.balance < 0) {
+            System.out.println(this.name + " need left-right rotation");
+
+            // left rotation of left node
+            left.right.left = left;
+            Node tempNode = left.right;
+            left.right = null;
+            left = tempNode;
+        }
+
         // Right rotation
-        if (Math.abs(balance) > 1) {
-            System.out.println(this.name + " need rotation");
+        if (balance > 1) {
+            System.out.println(this.name + " need right rotation");
             if (balance > 1) {
                 left.right = this;
                 Node tempNode = left;
@@ -50,6 +61,14 @@ public class Node {
             }
         }
 
+        // Left rotation
+        if (balance < -1) {
+            System.out.println(this.name + " need left rotation");
+            right.left = this;
+            Node tempNode = right;
+            right = null;
+            return tempNode;
+        }
 
         return this;
         // Need rotation?
