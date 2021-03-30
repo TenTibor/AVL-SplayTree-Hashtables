@@ -41,12 +41,13 @@ public class Node {
 
         // Left and right rotation after this
         if (balance > 1 && left != null && left.balance < 0) {
-            System.out.println(this.name + " need left-right rotation");
+            System.out.println(this.name + " need left-right rotation with: " + left.getName() + '/' + left.right.getName());
 
             // left rotation of left node
+            Node savedNode = left.right.left;
             left.right.left = left;
             Node tempNode = left.right;
-            left.right = null;
+            left.right = savedNode;
             left = tempNode;
         }
 
@@ -55,9 +56,10 @@ public class Node {
             System.out.println(this.name + " need right-left rotation");
 
             // left rotation of left node
+            Node savedNode = right.left.right;
             right.left.right = right;
             Node tempNode = right.left;
-            right.left = null;
+            right.left = savedNode;
             right = tempNode;
         }
 
