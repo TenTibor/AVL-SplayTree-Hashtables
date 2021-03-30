@@ -9,7 +9,7 @@ public class Main {
 //        String[] testWords = {"s", "a", "x", "d"};
 //        String[] testWords = {"s", "a", "x", "d", "b"};
 //        String[] testWords = {"s", "a", "x", "d", "b","c", "g", "h", "j", "z"}; //TODO fix this
-        String[] testWords = {"c", "b", "d"};
+        String[] testWords = {"c", "a", "0", "b", "d"};
 //        String[] testWords = {"a", "b", "c"};
 
         Item root = null;
@@ -35,8 +35,8 @@ public class Main {
             addTo.left = addItem(addTo.left, addThis);
         }
 
-        // set new depth
-        addTo.refreshDepth();
+        // set new balance
+        addTo.refreshBalance();
 
         // check if was rotation
         // Check right side
@@ -94,7 +94,7 @@ public class Main {
 
     public static void printTree(Item thisItem) {
         if (thisItem != null) {
-            System.out.println(thisItem.getName() + "(" + thisItem.getDepth() + ")->" + (thisItem.left != null ? thisItem.left.getName() : "[none]") + "/" + (thisItem.right != null ? thisItem.right.getName() : "[none]"));
+            System.out.println(thisItem.getName() + "(" + thisItem.balance + "/" + thisItem.getDepth() + ")->" + (thisItem.left != null ? thisItem.left.getName() : "[none]") + "/" + (thisItem.right != null ? thisItem.right.getName() : "[none]"));
             printTree(thisItem.left);
             printTree(thisItem.right);
         }

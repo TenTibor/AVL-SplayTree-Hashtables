@@ -3,6 +3,7 @@ package com.company;
 public class Item {
     String name = null; // ID
     int depth = 1;
+    int balance = 0;
     Item left = null;
     Item right = null;
 
@@ -24,14 +25,18 @@ public class Item {
             return this.right;
         else
             return this.left;
-
     }
 
-    public void refreshDepth() {
+    public void refreshBalance() {
+        // Refresh depth
         Item biggerItem = this.getBiggerItem();
         if (biggerItem != null)
             this.setDepth(biggerItem.getDepth() + 1);
 
+        // Refresh balance
+        balance = 0;
+        if (left != null) balance += left.depth;
+        if (right != null) balance -= right.depth;
         // Need rotation?
         // zigzag wild rotation
        /* if (left == null && (right != null && right.getDepth() > 1) && right.left != null) {
