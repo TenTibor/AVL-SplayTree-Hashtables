@@ -9,7 +9,8 @@ public class Main {
 //        String[] testWords = {"s", "a", "x", "d"};
 //        String[] testWords = {"s", "a", "x", "d", "b"};
 //        String[] testWords = {"s", "a", "x", "d", "b","c", "g", "h", "j", "z"}; //TODO fix this
-        String[] testWords = {"c", "a", "b"}; // left&right
+        String[] testWords = {"a", "c", "b"}; // right&left
+//        String[] testWords = {"c", "a", "b"}; // left&right
 //        String[] testWords = {"a", "b", "c"}; // left
 
         Node root = null;
