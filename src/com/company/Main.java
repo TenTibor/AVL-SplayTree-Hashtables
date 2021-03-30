@@ -6,8 +6,10 @@ public class Main {
 
 //        String[] testWords = {"1", "10", "5"};
 //        String[] testWords = {"d", "a", "f", "g", "h"};
-        String[] testWords = {"s", "a", "x", "d"};
-//        String[] testWords = {"s", "a", "x", "d", "b"}; //TODO b is not showing
+//        String[] testWords = {"s", "a", "x", "d"};
+//        String[] testWords = {"s", "a", "x", "d", "b"};
+//        String[] testWords = {"s", "a", "x", "d", "b","c", "g", "h", "j", "z"}; //TODO fix this
+        String[] testWords = {"c", "b", "d"};
 //        String[] testWords = {"a", "b", "c"};
 
         Item root = null;
@@ -16,9 +18,9 @@ public class Main {
         }
 
         printTree(root);
-        System.out.println("===========");
-        root = addItem(root, new Item("b"));
-        printTree(root);
+//        System.out.println("===========");
+//        root = addItem(root, new Item("b"));
+//        printTree(root);
     }
 
     public static Item addItem(Item addTo, Item addThis) {

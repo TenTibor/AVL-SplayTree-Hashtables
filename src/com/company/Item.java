@@ -34,12 +34,11 @@ public class Item {
 
         // Need rotation?
         // zigzag wild rotation
-        if (left == null && (right != null && right.getDepth() > 1) && right.left != null) {
+       /* if (left == null && (right != null && right.getDepth() > 1) && right.left != null) {
             right.left.left = this;
             right.left.right = right;
             this.rotated = 2;
             System.out.println("Right zigzag need to rotate:" + name);
-
         } else if (left == null && (right != null && right.getDepth() > 1)) {
             // Right need rotate
             System.out.println("Right need to rotate:" + name);
@@ -52,8 +51,21 @@ public class Item {
             rotated = -1;
         } else if ((left != null && right != null) && (left.rotated == 0 && right.rotated == 0) && Math.abs(left.getDepth() - right.getDepth()) > 1) {
             // One side need rotate
+            rotated = -3;
+//            Item blockToReplace = left.right;
+//            Item existNode = block ToReplace.left;
+//            if (existNode == null) existNode = blockToReplace.right;
+//
+//            if (this.getName().compareTo(existNode.getName()) < 0) {
+//                this.right = existNode;
+//                this.left = existNode;
+//            } else if (this.getName().compareTo(existNode.getName()) > 0) {
+//                this.right = existNode;//
+//                this.left = existNode;
+//            }
+
             System.out.println("Some side need to rotate: " + name + "//sides:" + left.getDepth() + "/" + right.getDepth());
-        }
+        }*/
     }
 
     public Item(String name) {
