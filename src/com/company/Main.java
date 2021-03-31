@@ -14,7 +14,9 @@ public class Main {
 //        String[] testWords = {"d", "a", "f", "g", "h"};
 //        String[] testWords = {"s", "a", "x", "d"};
 //        String[] testWords = {"s", "a", "x", "d", "b"};
-        String[] testWords = {"s", "a", "x", "d", "b", "c", "g", "h", "j", "z"};
+//        String[] testWords = {"Zoe", "Denis", "Sienna", "Angelica", "Hayden", "Macy", "Abbey", "Javier", "Camila", "David"}; // 2 people missing
+        String[] testWords = {"Zoe", "Denis", "Sienna", "Angelica", "Hayden", "Macy"}; // macy is on another side
+//        String[] testWords = {"s", "a", "x", "d", "b", "c", "g", "h", "j", "z"};
 //        String[] testWords = {"s", "a", "x", "d", "b", "c"};
 //        String[] testWords = {"s", "a", "x", "d", "b", "c", "g"}; // this works
 //        String[] testWords = {"s", "b", "x", "a", "d", "c"};
@@ -22,14 +24,10 @@ public class Main {
 //        String[] testWords = {"c", "a", "b"}; // left&right
 //        String[] testWords = {"a", "b", "c"}; // left
 //
-//        Node root = null;
-//        for (String word : testWords) {
-//            root = addItem(root, new Node(word));
-//        }
-//
+
         testStrings(testWords);
 
-//        testFile("custom1");
+//        testFile("custom1"); // this is not working.. Many people are missing... Mistake is somewhere after 40-45 people
     }
 
     public static void testStrings(String[] testWords) throws IOException {
@@ -39,6 +37,9 @@ public class Main {
         }
 
         printTree(root);
+//        System.out.println("======================");
+//        root = addItem(root, new Node("Macy"));
+//        printTree(root);
     }
 
     public static void testFile(String fileName) throws IOException {

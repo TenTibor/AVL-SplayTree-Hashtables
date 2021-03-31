@@ -44,6 +44,7 @@ public class Node {
             left.decreaseDepth();
             left.right.increaseDepth();
             Node savedNode = left.right.left;
+            if (savedNode == null) savedNode = left.right.right;
             left.right.left = left;
             Node tempNode = left.right;
             left.right = savedNode;
@@ -58,9 +59,9 @@ public class Node {
             right.decreaseDepth();
             right.left.increaseDepth();
             Node savedNode = right.left.right;
+            if (savedNode == null) savedNode = right.left.left;
             right.left.right = right;
             Node tempNode = right.left;
-//            tempNode.increaseDepth();
             right.left = savedNode;
             right = tempNode;
         }
@@ -90,9 +91,6 @@ public class Node {
         }
 
         return this;
-    }
-
-    public Node() {
     }
 
     public Node(String name) {
