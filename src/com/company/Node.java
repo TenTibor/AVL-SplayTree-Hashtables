@@ -2,6 +2,8 @@ package com.company;
 
 public class Node {
     String name = null; // ID
+    int age = 0;
+
     int depth = 1;
     int balance = 0;
     Node left = null;
@@ -90,8 +92,16 @@ public class Node {
         return this;
     }
 
+    public Node() {
+    }
+
     public Node(String name) {
         this.name = name;
+    }
+
+    public Node(String name, int age) {
+        this.name = name;
+        this.age = age;
     }
 
     public int getDepth() {

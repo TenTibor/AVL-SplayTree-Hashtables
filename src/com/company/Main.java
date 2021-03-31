@@ -1,8 +1,14 @@
 package com.company;
 
+//import com.fasterxml.jackson.databind.ObjectMapper;
+
+import java.io.*;
+import java.util.ArrayList;
+
 public class Main {
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
+
 
 //        String[] testWords = {"1", "10", "5"};
 //        String[] testWords = {"d", "a", "f", "g", "h"};
@@ -15,10 +21,17 @@ public class Main {
 //        String[] testWords = {"a", "c", "b"}; // right&left
 //        String[] testWords = {"c", "a", "b"}; // left&right
 //        String[] testWords = {"a", "b", "c"}; // left
+//
+//        Node root = null;
+//        for (String word : testWords) {
+//            root = addItem(root, new Node(word));
+//        }
+//
 
+        ArrayList<Node> nodes = getFromCsvFile();
         Node root = null;
-        for (String word : testWords) {
-            root = addItem(root, new Node(word));
+        for (Node thisNode : nodes) {
+            root = addItem(root, thisNode);
         }
 
         printTree(root);
@@ -45,5 +58,20 @@ public class Main {
             printTree(thisNode.left);
             printTree(thisNode.right);
         }
+    }
+
+    public static ArrayList<Node> getFromCsvFile() throws IOException {
+
+        BufferedReader reader = new BufferedReader(new FileReader("src/com/company/tests/Test100.csv"));
+        String line;
+        ArrayList<Node> allNodes = new ArrayList<Node>();
+        while ((line = reader.readLine()) != null) {
+            String[] data = line.split(",");
+            Node newNode = new Node(data[0], Integer.parseInt(data[1]));
+            allNodes.add(newNode);
+        }
+        reader.close();
+        System.out.println(allNodes.size() + " items was loaded.");
+        return allNodes;
     }
 }
