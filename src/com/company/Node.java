@@ -38,16 +38,20 @@ public class Node {
         if (left != null) balance += left.depth;
         if (right != null) balance -= right.depth;
 
-        if (left != null) System.out.println(balance + "/" + left.balance);
-
+//TODO depth is wrong and thats why its bad if
+//        if (left != null) System.out.println(getName() + ": " + balance + "/" + left.balance);
+//        if (left != null) System.out.println(name + ":" + balance + "-" + depth + ", LB:" + left.balance);
         // Left and right rotation after this
-        if (balance > 1 && left != null && left.balance > 0) {
+        if (balance > 1 && left != null && left.balance < 0) {
             System.out.println(this.name + " need left-right rotation with: " + left.getName() + '/' + left.right.getName());
 
             // left rotation of left node
+            left.decreaseDepth();
+            left.right.increaseDepth();
             Node savedNode = left.right.left;
             left.right.left = left;
             Node tempNode = left.right;
+//            tempNode.increaseDepth();
             left.right = savedNode;
             left = tempNode;
         }
@@ -57,17 +61,22 @@ public class Node {
             System.out.println(this.name + " need right-left rotation");
 
             // left rotation of left node
+            right.decreaseDepth();
+            right.left.increaseDepth();
             Node savedNode = right.left.right;
             right.left.right = right;
             Node tempNode = right.left;
+//            tempNode.increaseDepth();
             right.left = savedNode;
             right = tempNode;
         }
 
         // Right rotation
         if (balance > 1) {
-            balance = 0;
             System.out.println(this.name + " need right rotation");
+
+            this.decreaseDepth(2);
+            balance = 0;
             left.right = this;
             Node tempNode = left;
             left = null;
@@ -76,9 +85,12 @@ public class Node {
 
         // Left rotation
         if (balance < -1) {
-            balance = 0;
             System.out.println(this.name + " need left rotation");
+
+            this.decreaseDepth(2);
+            balance = 0;
             right.left = this;
+//            right.increaseDepth();
             Node tempNode = right;
             right = null;
             return tempNode;
@@ -139,6 +151,10 @@ public class Node {
 
     public void decreaseDepth() {
         this.depth--;
+    }
+
+    public void decreaseDepth(int times) {
+        this.depth = this.depth - times;
     }
 
     public Node getLeft() {

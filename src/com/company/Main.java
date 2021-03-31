@@ -9,6 +9,7 @@ public class Main {
 //        String[] testWords = {"s", "a", "x", "d"};
 //        String[] testWords = {"s", "a", "x", "d", "b"};
 //        String[] testWords = {"s", "a", "x", "d", "b","c", "g", "h", "j", "z"}; //TODO fix this
+//        String[] testWords = {"s", "a", "x", "d", "b", "c"};
         String[] testWords = {"s", "a", "x", "d", "b"};
 //        String[] testWords = {"s", "b", "x", "a", "d", "c"};
 //        String[] testWords = {"a", "c", "b"}; // right&left
