@@ -7,10 +7,6 @@ public class Node {
     Node left = null;
     Node right = null;
 
-    int rotated = 0;
-    // +1 -> rotated to right
-    // -1 -> rotated to left
-
     public Node getBiggerItem() {
         if (this.right == null) {
             if (this.left == null) {
@@ -48,7 +44,6 @@ public class Node {
             Node savedNode = left.right.left;
             left.right.left = left;
             Node tempNode = left.right;
-//            tempNode.increaseDepth();
             left.right = savedNode;
             left = tempNode;
         }
@@ -87,7 +82,6 @@ public class Node {
             this.decreaseDepth(2);
             balance = 0;
             right.left = this;
-//            right.increaseDepth();
             Node tempNode = right;
             right = null;
             return tempNode;

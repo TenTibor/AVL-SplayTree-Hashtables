@@ -36,10 +36,7 @@ public class Main {
             addTo.left = addItem(addTo.left, addThis);
         }
 
-        // set new balance
-        addTo = addTo.rebalanced();
-
-        return addTo;
+        return addTo.rebalanced();
     }
 
     public static void printTree(Node thisNode) {
