@@ -28,7 +28,7 @@ public class Main {
 //        }
 //
 
-        ArrayList<Node> nodes = getFromCsvFile();
+        ArrayList<Node> nodes = getFromCsvFile("test100");
         Node root = null;
         for (Node thisNode : nodes) {
             root = addItem(root, thisNode);
@@ -60,9 +60,9 @@ public class Main {
         }
     }
 
-    public static ArrayList<Node> getFromCsvFile() throws IOException {
+    public static ArrayList<Node> getFromCsvFile(String fileName) throws IOException {
 
-        BufferedReader reader = new BufferedReader(new FileReader("src/com/company/tests/Test100.csv"));
+        BufferedReader reader = new BufferedReader(new FileReader("src/com/company/tests/" + fileName + ".csv"));
         String line;
         ArrayList<Node> allNodes = new ArrayList<Node>();
         while ((line = reader.readLine()) != null) {
