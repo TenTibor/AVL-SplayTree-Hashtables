@@ -27,8 +27,22 @@ public class Main {
 //            root = addItem(root, new Node(word));
 //        }
 //
+        testStrings(testWords);
 
-        ArrayList<Node> nodes = getFromCsvFile("test100");
+//        testFile("custom1");
+    }
+
+    public static void testStrings(String[] testWords) throws IOException {
+        Node root = null;
+        for (String word : testWords) {
+            root = addItem(root, new Node(word));
+        }
+
+        printTree(root);
+    }
+
+    public static void testFile(String fileName) throws IOException {
+        ArrayList<Node> nodes = getFromCsvFile(fileName);
         Node root = null;
         for (Node thisNode : nodes) {
             root = addItem(root, thisNode);
