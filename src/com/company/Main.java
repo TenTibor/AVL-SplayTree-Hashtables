@@ -8,9 +8,9 @@ public class Main {
 //        String[] testWords = {"d", "a", "f", "g", "h"};
 //        String[] testWords = {"s", "a", "x", "d"};
 //        String[] testWords = {"s", "a", "x", "d", "b"};
-//        String[] testWords = {"s", "a", "x", "d", "b","c", "g", "h", "j", "z"}; //TODO fix this
+        String[] testWords = {"s", "a", "x", "d", "b", "c", "g", "h", "j", "z"};
 //        String[] testWords = {"s", "a", "x", "d", "b", "c"};
-        String[] testWords = {"s", "a", "x", "d", "b"};
+//        String[] testWords = {"s", "a", "x", "d", "b", "c", "g"}; // this works
 //        String[] testWords = {"s", "b", "x", "a", "d", "c"};
 //        String[] testWords = {"a", "c", "b"}; // right&left
 //        String[] testWords = {"c", "a", "b"}; // left&right
@@ -22,9 +22,6 @@ public class Main {
         }
 
         printTree(root);
-        System.out.println("===========");
-        root = addItem(root, new Node("c"));
-        printTree(root);
     }
 
     public static Node addItem(Node addTo, Node addThis) {
@@ -32,7 +29,7 @@ public class Main {
         if (addTo == null)
             addTo = addThis;
 
-        // Else continue in tree
+            // Else continue in tree
         else if (addTo.getName().compareTo(addThis.getName()) < 0) {
             addTo.right = addItem(addTo.right, addThis);
         } else if (addTo.getName().compareTo(addThis.getName()) > 0) {

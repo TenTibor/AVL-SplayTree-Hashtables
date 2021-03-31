@@ -38,12 +38,9 @@ public class Node {
         if (left != null) balance += left.depth;
         if (right != null) balance -= right.depth;
 
-//TODO depth is wrong and thats why its bad if
-//        if (left != null) System.out.println(getName() + ": " + balance + "/" + left.balance);
-//        if (left != null) System.out.println(name + ":" + balance + "-" + depth + ", LB:" + left.balance);
         // Left and right rotation after this
         if (balance > 1 && left != null && left.balance < 0) {
-            System.out.println(this.name + " need left-right rotation with: " + left.getName() + '/' + left.right.getName());
+//            System.out.println(this.name + " need left-right rotation with: " + left.getName() + '/' + left.right.getName());
 
             // left rotation of left node
             left.decreaseDepth();
@@ -58,7 +55,7 @@ public class Node {
 
         // Right and left rotation after this
         if (balance < -1 && right != null && right.balance > 0) {
-            System.out.println(this.name + " need right-left rotation");
+//            System.out.println(this.name + " need right-left rotation");
 
             // left rotation of left node
             right.decreaseDepth();
@@ -73,7 +70,7 @@ public class Node {
 
         // Right rotation
         if (balance > 1) {
-            System.out.println(this.name + " need right rotation");
+//            System.out.println(this.name + " need right rotation");
 
             this.decreaseDepth(2);
             balance = 0;
@@ -85,7 +82,7 @@ public class Node {
 
         // Left rotation
         if (balance < -1) {
-            System.out.println(this.name + " need left rotation");
+//            System.out.println(this.name + " need left rotation");
 
             this.decreaseDepth(2);
             balance = 0;
@@ -97,40 +94,6 @@ public class Node {
         }
 
         return this;
-        // Need rotation?
-        // zigzag wild rotation
-       /* if (left == null && (right != null && right.getDepth() > 1) && right.left != null) {
-            right.left.left = this;
-            right.left.right = right;
-            this.rotated = 2;
-            System.out.println("Right zigzag need to rotate:" + name);
-        } else if (left == null && (right != null && right.getDepth() > 1)) {
-            // Right need rotate
-            System.out.println("Right need to rotate:" + name);
-            right.left = this;
-            this.rotated = 1;
-        } else if (right == null && (left != null && left.getDepth() > 1)) {
-            // Left need rotate
-            System.out.println("Left need to rotate:" + name);
-            left.right = this;
-            rotated = -1;
-        } else if ((left != null && right != null) && (left.rotated == 0 && right.rotated == 0) && Math.abs(left.getDepth() - right.getDepth()) > 1) {
-            // One side need rotate
-            rotated = -3;
-//            Item blockToReplace = left.right;
-//            Item existNode = block ToReplace.left;
-//            if (existNode == null) existNode = blockToReplace.right;
-//
-//            if (this.getName().compareTo(existNode.getName()) < 0) {
-//                this.right = existNode;
-//                this.left = existNode;
-//            } else if (this.getName().compareTo(existNode.getName()) > 0) {
-//                this.right = existNode;//
-//                this.left = existNode;
-//            }
-
-            System.out.println("Some side need to rotate: " + name + "//sides:" + left.getDepth() + "/" + right.getDepth());
-        }*/
     }
 
     public Node(String name) {
