@@ -71,16 +71,16 @@ public class Main {
     }
 
     public static void printTree(Node root) {
-        System.out.println("============================");
+        System.out.println("---------------------------");
         int rootCount = printNode(root, 0);
         System.out.println("Count of items is: " + rootCount);
-        System.out.println("============================");
+        System.out.println("===========================");
     }
 
     public static int printNode(Node thisNode, int count) {
         if (thisNode != null) {
             count++;
-            System.out.println(thisNode.getName() + "(" + thisNode.balance + "/" + thisNode.getDepth() + ")->" + (thisNode.left != null ? thisNode.left.getName() : "[none]") + "/" + (thisNode.right != null ? thisNode.right.getName() : "[none]"));
+            System.out.println(thisNode.getName() + "(" + thisNode.balance + "/" + thisNode.getDepth() + ")=> " + (thisNode.left != null ? thisNode.left.getName() : "-") + "/" + (thisNode.right != null ? thisNode.right.getName() : "-"));
             count = printNode(thisNode.left, count);
             count = printNode(thisNode.right, count);
             return count;
