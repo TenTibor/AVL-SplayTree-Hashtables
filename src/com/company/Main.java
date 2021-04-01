@@ -6,7 +6,6 @@ import java.io.*;
 import java.util.ArrayList;
 
 public class Main {
-
     public static void main(String[] args) throws IOException {
 
 
@@ -25,9 +24,9 @@ public class Main {
 //        String[] testWords = {"a", "b", "c"}; // left
 //
 
-        testStrings(testWords);
+//        testStrings(testWords);
 
-//        testFile("custom1"); // this is not working.. Many people are missing... Mistake is somewhere after 40-45 people
+        testFile("custom1"); // one person is missing
     }
 
     public static void testStrings(String[] testWords) throws IOException {
@@ -50,6 +49,10 @@ public class Main {
         }
 
         printTree(root);
+
+        root = addItem(root, new Node("Karla Griffiths", 21));
+        printTree(root);
+
     }
 
     public static Node addItem(Node addTo, Node addThis) {
@@ -67,12 +70,22 @@ public class Main {
         return addTo.rebalanced();
     }
 
-    public static void printTree(Node thisNode) {
+    public static void printTree(Node root) {
+        System.out.println("============================");
+        int rootCount = printNode(root, 0);
+        System.out.println("Count of items is: " + rootCount);
+        System.out.println("============================");
+    }
+
+    public static int printNode(Node thisNode, int count) {
         if (thisNode != null) {
+            count++;
             System.out.println(thisNode.getName() + "(" + thisNode.balance + "/" + thisNode.getDepth() + ")->" + (thisNode.left != null ? thisNode.left.getName() : "[none]") + "/" + (thisNode.right != null ? thisNode.right.getName() : "[none]"));
-            printTree(thisNode.left);
-            printTree(thisNode.right);
+            count = printNode(thisNode.left, count);
+            count = printNode(thisNode.right, count);
+            return count;
         }
+        return count;
     }
 
     public static ArrayList<Node> getFromCsvFile(String fileName) throws IOException {

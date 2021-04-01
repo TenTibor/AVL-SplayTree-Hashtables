@@ -8,6 +8,7 @@ public class Node {
     int balance = 0;
     Node left = null;
     Node right = null;
+    boolean debug = true;
 
     public Node getBiggerItem() {
         if (this.right == null) {
@@ -38,7 +39,7 @@ public class Node {
 
         // Left and right rotation after this
         if (balance > 1 && left != null && left.balance < 0) {
-//            System.out.println(this.name + " need left-right rotation with: " + left.getName() + '/' + left.right.getName());
+            if (debug) System.out.println(this.name + " need left-right rotation with: " + left.getName() + '/' + left.right.getName());
 
             // left rotation of left node
             left.decreaseDepth();
@@ -53,7 +54,7 @@ public class Node {
 
         // Right and left rotation after this
         if (balance < -1 && right != null && right.balance > 0) {
-//            System.out.println(this.name + " need right-left rotation");
+            if (debug) System.out.println(this.name + " need right-left rotation");
 
             // left rotation of left node
             right.decreaseDepth();
@@ -68,7 +69,7 @@ public class Node {
 
         // Right rotation
         if (balance > 1) {
-//            System.out.println(this.name + " need right rotation");
+            if (debug) System.out.println(this.name + " need right rotation");
 
             this.decreaseDepth(2);
             balance = 0;
@@ -80,7 +81,7 @@ public class Node {
 
         // Left rotation
         if (balance < -1) {
-//            System.out.println(this.name + " need left rotation");
+            if (debug) System.out.println(this.name + " need left rotation");
 
             this.decreaseDepth(2);
             balance = 0;
