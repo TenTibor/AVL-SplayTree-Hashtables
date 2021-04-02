@@ -8,7 +8,7 @@ public class Node {
     int balance = 0;
     Node left = null;
     Node right = null;
-    boolean debug = true;
+    boolean debug = true; // just for testing purpose
 
     public Node getBiggerItem() {
         if (this.right == null) {
@@ -56,8 +56,12 @@ public class Node {
             // Switch nodes
             left = bottom;
             left.left = top;
-            left.left.right = bottomRight;
-            if (bottomRight == null) left.left.left = bottomLeft;
+//            left.left.right = bottomRight;
+//            if (bottomRight == null) left.left.left = bottomLeft;
+
+            left.left.right = bottomLeft;
+            left.right = bottomRight;
+//            left.left.left = topLeft;
 
 //            left = bottom;
 //            left.left = top;
@@ -93,8 +97,13 @@ public class Node {
             // Switch nodes
             right = bottom;
             right.right = top;
-            right.right.right = bottomRight;
-            if (bottomRight == null) right.right.left = bottomLeft;
+
+            right.right.left = bottomRight;
+            right.left = bottomLeft;
+
+
+//            right.right.right = bottomRight;
+//            if (bottomRight == null) right.right.left = bottomLeft;
 //            right = bottom;
 //            right.right = top;
 //            right.left = bottomRight;
@@ -115,9 +124,10 @@ public class Node {
 
             this.decreaseDepth(2);
             balance = 0;
+            Node tempNodeRight = left.right;
             left.right = this;
             Node tempNode = left;
-            left = null;
+            left = tempNodeRight;
             return tempNode;
         }
 
@@ -127,9 +137,10 @@ public class Node {
 
             this.decreaseDepth(2);
             balance = 0;
+            Node tempNodeLeft = right.left;
             right.left = this;
             Node tempNode = right;
-            right = null;
+            right = tempNodeLeft;
             return tempNode;
         }
 

@@ -25,8 +25,9 @@ public class Main {
 //        String[] testWords = {"a", "b", "c"}; // left
 
 //        testStrings(testWords);
-//        testFile("custom1"); // one person is missing
-        testFile("custom1b"); // ron je niekde v prec
+//        testFile("custom2"); // one person is missing [done]
+        testFile("test100");
+//        testFile("custom1b"); // ron je niekde v prec [done]
     }
 
     public static void testStrings(String[] testWords) throws IOException {
@@ -50,17 +51,16 @@ public class Main {
 
         printTree(root);
 
-        root = addItem(root, new Node("Ron Baker", 49));
-        printTree(root);
+//        root = addItem(root, new Node("Karla Griffiths", 21));
+//        root = addItem(root, new Node("Macy Murray",55));
+//        printTree(root);
 
     }
 
     public static Node addItem(Node addTo, Node addThis) {
-        //If this item is empty
         if (addTo == null)
             addTo = addThis;
 
-            // Else continue in tree
         else if (addTo.getName().compareTo(addThis.getName()) < 0) {
             addTo.right = addItem(addTo.right, addThis);
         } else if (addTo.getName().compareTo(addThis.getName()) > 0) {
