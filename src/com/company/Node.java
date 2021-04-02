@@ -56,9 +56,14 @@ public class Node {
             // Switch nodes
             left = bottom;
             left.left = top;
-            left.right = bottomRight;
-            left.left.left = topLeft;
-            left.left.right = bottomLeft;
+            left.left.right = bottomRight;
+            if (bottomRight == null) left.left.left = bottomLeft;
+
+//            left = bottom;
+//            left.left = top;
+//            left.right = bottomRight;
+//            left.left.left = topLeft;
+//            left.left.right = bottomLeft;
 
 //            Node savedNode = left.right.left;
 //            if (left.right.right == null) {
@@ -88,9 +93,13 @@ public class Node {
             // Switch nodes
             right = bottom;
             right.right = top;
-            right.left = bottomRight;
-            right.right.left = topLeft;
-            right.right.right = bottomLeft;
+            right.right.right = bottomRight;
+            if (bottomRight == null) right.right.left = bottomLeft;
+//            right = bottom;
+//            right.right = top;
+//            right.left = bottomRight;
+//            right.right.left = topLeft;
+//            right.right.right = bottomLeft;
 
 //            Node savedNode = right.left.right;
 //            if (savedNode == null) savedNode = right.left.left;

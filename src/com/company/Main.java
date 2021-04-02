@@ -14,8 +14,8 @@ public class Main {
 //        String[] testWords = {"s", "a", "x", "d"};
 //        String[] testWords = {"s", "a", "x", "d", "b"};
 //        String[] testWords = {"Zoe", "Denis", "Sienna", "Angelica", "Hayden", "Macy", "Abbey", "Javier", "Camila", "David"}; // 2 people missing
-//        String[] testWords = {"Zoe", "Denis", "Sienna", "Angelica", "Hayden", "Macy"}; // macy dissapierd
-        String[] testWords = {"Zoe", "Denis", "Sienna", "Angelica", "Hayden"};
+//        String[] testWords = {"Zoe", "Denis", "Sienna", "Angelica", "Hayden"}; // macy dissapierd
+//        String[] testWords = {"Zoe", "Denis", "Sienna"};
 //        String[] testWords = {"s", "a", "x", "d", "b", "c", "g", "h", "j", "z"};
 //        String[] testWords = {"s", "a", "x", "d", "b", "c"};
 //        String[] testWords = {"s", "a", "x", "d", "b", "c", "g"}; // this works
@@ -24,9 +24,9 @@ public class Main {
 //        String[] testWords = {"c", "a", "b"}; // left&right
 //        String[] testWords = {"a", "b", "c"}; // left
 
-        testStrings(testWords);
+//        testStrings(testWords);
 //        testFile("custom1"); // one person is missing
-//        testFile("custom1b"); // ron je niekde v prec
+        testFile("custom1b"); // ron je niekde v prec
     }
 
     public static void testStrings(String[] testWords) throws IOException {
@@ -50,7 +50,7 @@ public class Main {
 
         printTree(root);
 
-//        root = addItem(root, new Node("Ron Baker", 49));
+        root = addItem(root, new Node("Ron Baker", 49));
         printTree(root);
 
     }
