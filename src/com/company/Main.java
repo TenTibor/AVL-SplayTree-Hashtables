@@ -26,7 +26,8 @@ public class Main {
 
 //        testStrings(testWords);
 //        testFile("custom2"); // one person is missing [done]
-        testFile("test100");
+//        testFile("test100"); //[DONE]
+        testFile("test100"); //[DONE]
 //        testFile("custom1b"); // ron je niekde v prec [done]
     }
 
@@ -65,7 +66,7 @@ public class Main {
             addTo.right = addItem(addTo.right, addThis);
         } else if (addTo.getName().compareTo(addThis.getName()) > 0) {
             addTo.left = addItem(addTo.left, addThis);
-        }
+        } else System.out.println("DUPLICATE");
 
         return addTo.rebalanced();
     }
