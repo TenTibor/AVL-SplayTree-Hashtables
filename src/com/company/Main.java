@@ -27,7 +27,8 @@ public class Main {
 //        testStrings(testWords);
 //        testFile("custom2"); // one person is missing [done]
 //        testFile("test100"); //[DONE]
-        testFile("test100"); //[DONE]
+//        testFile("test10k"); //[DONE]
+        testFile("test100k-b"); //[DONE]
 //        testFile("custom1b"); // ron je niekde v prec [done]
     }
 
@@ -49,13 +50,7 @@ public class Main {
         for (Node thisNode : nodes) {
             root = addItem(root, thisNode);
         }
-
         printTree(root);
-
-//        root = addItem(root, new Node("Karla Griffiths", 21));
-//        root = addItem(root, new Node("Macy Murray",55));
-//        printTree(root);
-
     }
 
     public static Node addItem(Node addTo, Node addThis) {
@@ -66,7 +61,7 @@ public class Main {
             addTo.right = addItem(addTo.right, addThis);
         } else if (addTo.getName().compareTo(addThis.getName()) > 0) {
             addTo.left = addItem(addTo.left, addThis);
-        } else System.out.println("DUPLICATE");
+        }
 
         return addTo.rebalanced();
     }

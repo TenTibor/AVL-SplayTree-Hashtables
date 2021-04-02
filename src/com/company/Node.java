@@ -8,7 +8,7 @@ public class Node {
     int balance = 0;
     Node left = null;
     Node right = null;
-    boolean debug = true; // just for testing purpose
+    boolean debug = false; // just for testing purpose
 
     public Node getBiggerItem() {
         if (this.right == null) {
