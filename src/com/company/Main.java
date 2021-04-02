@@ -1,7 +1,5 @@
 package com.company;
 
-//import com.fasterxml.jackson.databind.ObjectMapper;
-
 import java.io.*;
 import java.util.ArrayList;
 
@@ -28,7 +26,7 @@ public class Main {
 //        testFile("custom2"); // one person is missing [done]
 //        testFile("test100"); //[DONE]
 //        testFile("test10k"); //[DONE]
-        testFile("test100k-b"); //[DONE]
+        testFile("test1k"); //[DONE]
 //        testFile("custom1b"); // ron je niekde v prec [done]
     }
 

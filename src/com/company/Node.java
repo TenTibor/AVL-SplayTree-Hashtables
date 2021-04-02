@@ -1,14 +1,18 @@
 package com.company;
 
 public class Node {
+    // node data
     String name = null; // ID
     int age = 0;
 
+    // attributes for working AVL
     int depth = 1;
     int balance = 0;
     Node left = null;
     Node right = null;
-    boolean debug = false; // just for testing purpose
+
+    // just for testing purpose
+    boolean debug = false;
 
     public Node getBiggerItem() {
         if (this.right == null) {
@@ -49,34 +53,15 @@ public class Node {
             // Save all nodes
             Node top = left;
             Node bottom = left.right;
-            Node topLeft = left.left;
             Node bottomLeft = left.right.left;
             Node bottomRight = left.right.right;
 
             // Switch nodes
             left = bottom;
             left.left = top;
-//            left.left.right = bottomRight;
-//            if (bottomRight == null) left.left.left = bottomLeft;
 
             left.left.right = bottomLeft;
             left.right = bottomRight;
-//            left.left.left = topLeft;
-
-//            left = bottom;
-//            left.left = top;
-//            left.right = bottomRight;
-//            left.left.left = topLeft;
-//            left.left.right = bottomLeft;
-
-//            Node savedNode = left.right.left;
-//            if (left.right.right == null) {
-//                Node savedNodeFromRight = left.right.right;
-//            };
-//            left.right.left = left;
-//            Node tempNode = left.right;
-//            left.right = savedNode;
-//            left = tempNode;
         }
 
         // Right and left rotation after this
@@ -90,7 +75,6 @@ public class Node {
             // Save all nodes
             Node top = right;
             Node bottom = right.left;
-            Node topLeft = right.right;
             Node bottomLeft = right.left.left;
             Node bottomRight = right.left.right;
 
@@ -100,22 +84,6 @@ public class Node {
 
             right.right.left = bottomRight;
             right.left = bottomLeft;
-
-
-//            right.right.right = bottomRight;
-//            if (bottomRight == null) right.right.left = bottomLeft;
-//            right = bottom;
-//            right.right = top;
-//            right.left = bottomRight;
-//            right.right.left = topLeft;
-//            right.right.right = bottomLeft;
-
-//            Node savedNode = right.left.right;
-//            if (savedNode == null) savedNode = right.left.left;
-//            right.left.right = right;
-//            Node tempNode = right.left;
-//            right.left = savedNode;
-//            right = tempNode;
         }
 
         // Right rotation
@@ -176,14 +144,6 @@ public class Node {
         this.depth = this.depth - times;
     }
 
-    public Node getLeft() {
-        return left;
-    }
-
-    public void setLeft(Node left) {
-        this.left = left;
-    }
-
     public Node getRight() {
         return right;
     }
@@ -196,7 +156,4 @@ public class Node {
         return name;
     }
 
-    public void setName(String name) {
-        this.name = name;
-    }
 }
