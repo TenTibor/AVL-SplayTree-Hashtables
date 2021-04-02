@@ -14,7 +14,8 @@ public class Main {
 //        String[] testWords = {"s", "a", "x", "d"};
 //        String[] testWords = {"s", "a", "x", "d", "b"};
 //        String[] testWords = {"Zoe", "Denis", "Sienna", "Angelica", "Hayden", "Macy", "Abbey", "Javier", "Camila", "David"}; // 2 people missing
-        String[] testWords = {"Zoe", "Denis", "Sienna", "Angelica", "Hayden", "Macy"}; // macy is on another side
+//        String[] testWords = {"Zoe", "Denis", "Sienna", "Angelica", "Hayden", "Macy"}; // macy dissapierd
+        String[] testWords = {"Zoe", "Denis", "Sienna", "Angelica", "Hayden"};
 //        String[] testWords = {"s", "a", "x", "d", "b", "c", "g", "h", "j", "z"};
 //        String[] testWords = {"s", "a", "x", "d", "b", "c"};
 //        String[] testWords = {"s", "a", "x", "d", "b", "c", "g"}; // this works
@@ -22,11 +23,10 @@ public class Main {
 //        String[] testWords = {"a", "c", "b"}; // right&left
 //        String[] testWords = {"c", "a", "b"}; // left&right
 //        String[] testWords = {"a", "b", "c"}; // left
-//
 
-//        testStrings(testWords);
-
-        testFile("custom1"); // one person is missing
+        testStrings(testWords);
+//        testFile("custom1"); // one person is missing
+//        testFile("custom1b"); // ron je niekde v prec
     }
 
     public static void testStrings(String[] testWords) throws IOException {
@@ -36,9 +36,9 @@ public class Main {
         }
 
         printTree(root);
-//        System.out.println("======================");
-//        root = addItem(root, new Node("Macy"));
-//        printTree(root);
+        System.out.println("======================");
+        root = addItem(root, new Node("Macy"));
+        printTree(root);
     }
 
     public static void testFile(String fileName) throws IOException {
@@ -50,7 +50,7 @@ public class Main {
 
         printTree(root);
 
-        root = addItem(root, new Node("Karla Griffiths", 21));
+//        root = addItem(root, new Node("Ron Baker", 49));
         printTree(root);
 
     }

@@ -39,17 +39,35 @@ public class Node {
 
         // Left and right rotation after this
         if (balance > 1 && left != null && left.balance < 0) {
-            if (debug) System.out.println(this.name + " need left-right rotation with: " + left.getName() + '/' + left.right.getName());
+            if (debug)
+                System.out.println(this.name + " need left-right rotation with: " + left.getName() + '/' + left.right.getName());
 
             // left rotation of left node
             left.decreaseDepth();
             left.right.increaseDepth();
-            Node savedNode = left.right.left;
-            if (savedNode == null) savedNode = left.right.right;
-            left.right.left = left;
-            Node tempNode = left.right;
-            left.right = savedNode;
-            left = tempNode;
+
+            // Save all nodes
+            Node top = left;
+            Node bottom = left.right;
+            Node topLeft = left.left;
+            Node bottomLeft = left.right.left;
+            Node bottomRight = left.right.right;
+
+            // Switch nodes
+            left = bottom;
+            left.left = top;
+            left.right = bottomRight;
+            left.left.left = topLeft;
+            left.left.right = bottomLeft;
+
+//            Node savedNode = left.right.left;
+//            if (left.right.right == null) {
+//                Node savedNodeFromRight = left.right.right;
+//            };
+//            left.right.left = left;
+//            Node tempNode = left.right;
+//            left.right = savedNode;
+//            left = tempNode;
         }
 
         // Right and left rotation after this
@@ -59,12 +77,27 @@ public class Node {
             // left rotation of left node
             right.decreaseDepth();
             right.left.increaseDepth();
-            Node savedNode = right.left.right;
-            if (savedNode == null) savedNode = right.left.left;
-            right.left.right = right;
-            Node tempNode = right.left;
-            right.left = savedNode;
-            right = tempNode;
+
+            // Save all nodes
+            Node top = right;
+            Node bottom = right.left;
+            Node topLeft = right.right;
+            Node bottomLeft = right.left.left;
+            Node bottomRight = right.left.right;
+
+            // Switch nodes
+            right = bottom;
+            right.right = top;
+            right.left = bottomRight;
+            right.right.left = topLeft;
+            right.right.right = bottomLeft;
+
+//            Node savedNode = right.left.right;
+//            if (savedNode == null) savedNode = right.left.left;
+//            right.left.right = right;
+//            Node tempNode = right.left;
+//            right.left = savedNode;
+//            right = tempNode;
         }
 
         // Right rotation
