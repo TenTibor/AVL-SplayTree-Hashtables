@@ -23,7 +23,7 @@ public class Main {
         return addTo.rebalanced();
     }
 
-    public static void findNode(String findThisName, Node root){
+    public static void findNode(String findThisName, Node root) {
         Node foundNode = searching(findThisName, root);
         if (foundNode != null) foundNode.print();
         else System.out.println("Item was not found");
@@ -52,11 +52,15 @@ public class Main {
     }
 
     public static Node importFromFile(String fileName) throws IOException {
+        long timeStarted = System.currentTimeMillis();
         ArrayList<Node> nodes = getFromCsvFile(fileName);
         Node root = null;
         for (Node thisNode : nodes) {
             root = addItem(root, thisNode);
         }
+
+        long timeFinished = System.currentTimeMillis();
+        System.out.println(nodes.size() + " items was added in " + (timeFinished - timeStarted) + " ms");
         return root;
     }
 
@@ -89,7 +93,7 @@ public class Main {
             allNodes.add(newNode);
         }
         reader.close();
-        System.out.println(allNodes.size() + " items was loaded.");
+//        System.out.println(allNodes.size() + " items was loaded.");
         return allNodes;
     }
 }
