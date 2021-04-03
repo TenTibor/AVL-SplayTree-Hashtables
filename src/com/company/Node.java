@@ -164,8 +164,8 @@ public class Node {
         return age;
     }
 
-    public void print() {
-        System.out.println("[" + getName() + ", " + getAge() + "years old]");
+    public String getItem() {
+        return "[" + getName() + ", " + getAge() + "years old]";
     }
 
 }

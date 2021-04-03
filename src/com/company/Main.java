@@ -6,8 +6,9 @@ import java.util.ArrayList;
 public class Main {
     public static void main(String[] args) throws IOException {
         // my implementation
-        Node root = importFromFile("test100k");
-        findNode("Selena Bailey", root);
+        ArrayList<Node> importedItems = getItemFromCsvFile("test300k");
+        Node root = addItemsToTree(importedItems);
+        findNode("Lynn Jefferson", root);
     }
 
     public static Node addItem(Node addTo, Node addThis) {
@@ -24,9 +25,17 @@ public class Main {
     }
 
     public static void findNode(String findThisName, Node root) {
+        long timeStarted = System.currentTimeMillis();
+        System.out.println(timeStarted);
+
         Node foundNode = searching(findThisName, root);
-        if (foundNode != null) foundNode.print();
-        else System.out.println("Item was not found");
+        if (foundNode == null)
+            System.out.println("Item was not found");
+        else {
+            long timeFinished = System.currentTimeMillis();
+            System.out.println(timeFinished);
+            System.out.println("Item: " + foundNode.getItem() + " was found in " + (timeFinished - timeStarted) + " ms");
+        }
     }
 
     public static Node searching(String findThisName, Node findHere) {
@@ -51,16 +60,15 @@ public class Main {
         printTree(root);
     }
 
-    public static Node importFromFile(String fileName) throws IOException {
+    public static Node addItemsToTree(ArrayList<Node> items) throws IOException {
         long timeStarted = System.currentTimeMillis();
-        ArrayList<Node> nodes = getFromCsvFile(fileName);
         Node root = null;
-        for (Node thisNode : nodes) {
+        for (Node thisNode : items) {
             root = addItem(root, thisNode);
         }
 
         long timeFinished = System.currentTimeMillis();
-        System.out.println(nodes.size() + " items was added in " + (timeFinished - timeStarted) + " ms");
+        System.out.println(items.size() + " items was added in " + (timeFinished - timeStarted) + " ms");
         return root;
     }
 
@@ -82,7 +90,7 @@ public class Main {
         return count;
     }
 
-    public static ArrayList<Node> getFromCsvFile(String fileName) throws IOException {
+    public static ArrayList<Node> getItemFromCsvFile(String fileName) throws IOException {
 
         BufferedReader reader = new BufferedReader(new FileReader("src/com/company/tests/" + fileName + ".csv"));
         String line;
