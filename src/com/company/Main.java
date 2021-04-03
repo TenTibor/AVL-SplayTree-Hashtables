@@ -6,28 +6,7 @@ import java.util.ArrayList;
 public class Main {
     public static void main(String[] args) throws IOException {
 
-
-//        String[] testWords = {"1", "10", "5"};
-//        String[] testWords = {"d", "a", "f", "g", "h"};
-//        String[] testWords = {"s", "a", "x", "d"};
-//        String[] testWords = {"s", "a", "x", "d", "b"};
-//        String[] testWords = {"Zoe", "Denis", "Sienna", "Angelica", "Hayden", "Macy", "Abbey", "Javier", "Camila", "David"}; // 2 people missing
-//        String[] testWords = {"Zoe", "Denis", "Sienna", "Angelica", "Hayden"}; // macy dissapierd
-//        String[] testWords = {"Zoe", "Denis", "Sienna"};
-//        String[] testWords = {"s", "a", "x", "d", "b", "c", "g", "h", "j", "z"};
-//        String[] testWords = {"s", "a", "x", "d", "b", "c"};
-//        String[] testWords = {"s", "a", "x", "d", "b", "c", "g"}; // this works
-//        String[] testWords = {"s", "b", "x", "a", "d", "c"};
-//        String[] testWords = {"a", "c", "b"}; // right&left
-//        String[] testWords = {"c", "a", "b"}; // left&right
-//        String[] testWords = {"a", "b", "c"}; // left
-
-//        testStrings(testWords);
-//        testFile("custom2"); // one person is missing [done]
-//        testFile("test100"); //[DONE]
-//        testFile("test10k"); //[DONE]
-        testFile("test1k"); //[DONE]
-//        testFile("custom1b"); // ron je niekde v prec [done]
+        Node root = importFile("test100k");
     }
 
     public static void testStrings(String[] testWords) throws IOException {
@@ -42,13 +21,14 @@ public class Main {
         printTree(root);
     }
 
-    public static void testFile(String fileName) throws IOException {
+    public static Node importFile(String fileName) throws IOException {
         ArrayList<Node> nodes = getFromCsvFile(fileName);
         Node root = null;
         for (Node thisNode : nodes) {
             root = addItem(root, thisNode);
         }
         printTree(root);
+        return root;
     }
 
     public static Node addItem(Node addTo, Node addThis) {
