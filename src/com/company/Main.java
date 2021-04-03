@@ -5,10 +5,10 @@ import java.util.ArrayList;
 
 public class Main {
     public static void main(String[] args) throws IOException {
+        ArrayList<Node> importedItems = getItemFromCsvFile("test100k");
         // my implementation
-        ArrayList<Node> importedItems = getItemFromCsvFile("test300k");
         Node root = addItemsToTree(importedItems);
-        findNode("Lynn Jefferson", root);
+        searchManyItems(importedItems, root);
     }
 
     public static Node addItem(Node addTo, Node addThis) {
@@ -24,31 +24,35 @@ public class Main {
         return addTo.rebalanced();
     }
 
-    public static void findNode(String findThisName, Node root) {
+    public static void searchManyItems(ArrayList<Node> items, Node root) {
         long timeStarted = System.currentTimeMillis();
-        System.out.println(timeStarted);
 
-        Node foundNode = searching(findThisName, root);
-        if (foundNode == null)
-            System.out.println("Item was not found");
-        else {
-            long timeFinished = System.currentTimeMillis();
-            System.out.println(timeFinished);
-            System.out.println("Item: " + foundNode.getItem() + " was found in " + (timeFinished - timeStarted) + " ms");
+        // Pick some range
+        int countOfAllItems = items.size();
+        int downIndex = countOfAllItems / 4;
+        int upIndex = countOfAllItems / 3 + downIndex;
+
+        // Search any item in range
+        int foundItems = 0;
+        for (int i = downIndex; i < upIndex; i++) {
+            if (findItem(items.get(i).getName(), root)) foundItems++;
         }
+        long timeFinished = System.currentTimeMillis();
+        System.out.println(foundItems + "(/" + (upIndex-downIndex) + ") items was found in: " + (timeFinished - timeStarted) + " ms");
+
     }
 
-    public static Node searching(String findThisName, Node findHere) {
-        Node foundNode = null;
-        if (findHere.getName().equals(findThisName)) foundNode = findHere;
+    public static boolean findItem(String findThisName, Node findHere) {
+        boolean found = false;
+        if (findHere.getName().equals(findThisName)) found = true;
 
         else if (findHere.getName().compareTo(findThisName) < 0 && findHere.getRight() != null) {
-            foundNode = searching(findThisName, findHere.getRight());
+            found = findItem(findThisName, findHere.getRight());
         } else if (findHere.getName().compareTo(findThisName) > 0 && findHere.getLeft() != null) {
-            foundNode = searching(findThisName, findHere.getLeft());
+            found = findItem(findThisName, findHere.getLeft());
         }
 
-        return foundNode;
+        return found;
     }
 
     public static void testStrings(String[] testWords) throws IOException {
