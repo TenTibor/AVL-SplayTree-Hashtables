@@ -7,8 +7,14 @@ public class Main {
     public static void main(String[] args) throws IOException {
         ArrayList<Node> importedItems = getItemFromCsvFile("test100k");
         // my implementation
+        System.out.println("AVL moja implementácia");
         Node root = addItemsToTree(importedItems);
         searchManyItems(importedItems, root);
+
+        System.out.println("====================");
+        System.out.println("Cudzia implementácia");
+        // pridavanie cudzej implementacie
+        // hladanie cudzej implementacie
     }
 
     public static Node addItem(Node addTo, Node addThis) {
@@ -38,8 +44,7 @@ public class Main {
             if (findItem(items.get(i).getName(), root)) foundItems++;
         }
         long timeFinished = System.currentTimeMillis();
-        System.out.println(foundItems + "(/" + (upIndex-downIndex) + ") items was found in: " + (timeFinished - timeStarted) + " ms");
-
+        System.out.println(foundItems + "(/" + (upIndex - downIndex) + ") items was found in: " + (timeFinished - timeStarted) + " ms");
     }
 
     public static boolean findItem(String findThisName, Node findHere) {
