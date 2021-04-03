@@ -148,6 +148,10 @@ public class Node {
         return right;
     }
 
+    public Node getLeft() {
+        return left;
+    }
+
     public void setRight(Node right) {
         this.right = right;
     }

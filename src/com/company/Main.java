@@ -5,11 +5,9 @@ import java.util.ArrayList;
 
 public class Main {
     public static void main(String[] args) throws IOException {
-
-        Node root = importFile("test100k");
-//        printTree(root);
-        Node foundNode = findNode("Alba Attwood", root);
-        if (foundNode != null) foundNode.print();
+        // my implementation
+        Node root = importFromFile("test100k");
+        findNode("Selena Bailey", root);
     }
 
     public static Node addItem(Node addTo, Node addThis) {
@@ -25,9 +23,23 @@ public class Main {
         return addTo.rebalanced();
     }
 
-    public static Node findNode(String findThisName, Node root) {
-        System.out.println("Item wasnt found");
-        return null;
+    public static void findNode(String findThisName, Node root){
+        Node foundNode = searching(findThisName, root);
+        if (foundNode != null) foundNode.print();
+        else System.out.println("Item was not found");
+    }
+
+    public static Node searching(String findThisName, Node findHere) {
+        Node foundNode = null;
+        if (findHere.getName().equals(findThisName)) foundNode = findHere;
+
+        else if (findHere.getName().compareTo(findThisName) < 0 && findHere.getRight() != null) {
+            foundNode = searching(findThisName, findHere.getRight());
+        } else if (findHere.getName().compareTo(findThisName) > 0 && findHere.getLeft() != null) {
+            foundNode = searching(findThisName, findHere.getLeft());
+        }
+
+        return foundNode;
     }
 
     public static void testStrings(String[] testWords) throws IOException {
@@ -39,7 +51,7 @@ public class Main {
         printTree(root);
     }
 
-    public static Node importFile(String fileName) throws IOException {
+    public static Node importFromFile(String fileName) throws IOException {
         ArrayList<Node> nodes = getFromCsvFile(fileName);
         Node root = null;
         for (Node thisNode : nodes) {
