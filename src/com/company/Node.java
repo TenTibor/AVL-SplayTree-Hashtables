@@ -156,4 +156,12 @@ public class Node {
         return name;
     }
 
+    public int getAge() {
+        return age;
+    }
+
+    public void print() {
+        System.out.println("[" + getName() + ", " + getAge() + "years old]");
+    }
+
 }

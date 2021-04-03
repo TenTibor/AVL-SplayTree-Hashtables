@@ -7,28 +7,9 @@ public class Main {
     public static void main(String[] args) throws IOException {
 
         Node root = importFile("test100k");
-    }
-
-    public static void testStrings(String[] testWords) throws IOException {
-        Node root = null;
-        for (String word : testWords) {
-            root = addItem(root, new Node(word));
-        }
-
-        printTree(root);
-        System.out.println("======================");
-        root = addItem(root, new Node("Macy"));
-        printTree(root);
-    }
-
-    public static Node importFile(String fileName) throws IOException {
-        ArrayList<Node> nodes = getFromCsvFile(fileName);
-        Node root = null;
-        for (Node thisNode : nodes) {
-            root = addItem(root, thisNode);
-        }
-        printTree(root);
-        return root;
+//        printTree(root);
+        Node foundNode = findNode("Alba Attwood", root);
+        if (foundNode != null) foundNode.print();
     }
 
     public static Node addItem(Node addTo, Node addThis) {
@@ -42,6 +23,29 @@ public class Main {
         }
 
         return addTo.rebalanced();
+    }
+
+    public static Node findNode(String findThisName, Node root) {
+        System.out.println("Item wasnt found");
+        return null;
+    }
+
+    public static void testStrings(String[] testWords) throws IOException {
+        Node root = null;
+        for (String word : testWords) {
+            root = addItem(root, new Node(word));
+        }
+
+        printTree(root);
+    }
+
+    public static Node importFile(String fileName) throws IOException {
+        ArrayList<Node> nodes = getFromCsvFile(fileName);
+        Node root = null;
+        for (Node thisNode : nodes) {
+            root = addItem(root, thisNode);
+        }
+        return root;
     }
 
     public static void printTree(Node root) {
