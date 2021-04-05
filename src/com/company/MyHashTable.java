@@ -16,18 +16,20 @@ public class MyHashTable {
         }
     }
 
-    public int hashIndex(String key) {
+    public int hash(String key) {
         // Calculate hash by sum of letters.. But modulo size for staying in list capacity
-        int finalHash = 0;
+        int finalHash = key.length();
         for (int i = 0; i < key.length(); i++) {
-            finalHash = finalHash + key.charAt(i);
+//            System.out.println(finalHash);
+            finalHash = finalHash * key.charAt(i) + key.charAt(i);
         }
 //        System.out.println("hash:" + finalHash % size);
-        return finalHash % size;
+//        System.out.println(finalHash % size);
+        return Math.abs(finalHash % size);
     }
 
     public void insert(String name, int age) {
-        int index = hashIndex(name);
+        int index = hash(name);
         if (hashTable.get(index) == null) {
             hashTable.set(index, new NodeForHash(name, age));
 //            freeIndexes--;
@@ -43,7 +45,7 @@ public class MyHashTable {
     }
 
     public NodeForHash get(String key) {
-        NodeForHash itemOnIndex = hashTable.get(hashIndex(key));
+        NodeForHash itemOnIndex = hashTable.get(hash(key));
         if (itemOnIndex.chaining.size() == 0 || itemOnIndex.getName().equals(key))
             return itemOnIndex;
         else {
