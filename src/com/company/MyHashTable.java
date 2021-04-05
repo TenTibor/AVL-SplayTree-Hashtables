@@ -3,7 +3,7 @@ package com.company;
 import java.util.ArrayList;
 
 public class MyHashTable {
-    ArrayList<PersonForHash> hashTable;
+    ArrayList<NodeForHash> hashTable;
     int size = 0;
 
     public MyHashTable(int size) {
@@ -27,16 +27,16 @@ public class MyHashTable {
     public void insert(String name, int age) {
         int index = hashIndex(name);
         if (hashTable.get(index) == null) {
-            hashTable.set(index, new PersonForHash(name, age));
+            hashTable.set(index, new NodeForHash(name, age));
         } else {
 //            System.out.println("Chaining is happening");
             // chaining
-            hashTable.get(index).chaining.add(new PersonForHash(name, age));
+            hashTable.get(index).chaining.add(new NodeForHash(name, age));
         }
     }
 
-    public PersonForHash get(String key) {
-        PersonForHash itemOnIndex = hashTable.get(hashIndex(key));
+    public NodeForHash get(String key) {
+        NodeForHash itemOnIndex = hashTable.get(hashIndex(key));
         if (itemOnIndex.chaining.size() == 0 || itemOnIndex.getName().equals(key))
             return itemOnIndex;
         else {

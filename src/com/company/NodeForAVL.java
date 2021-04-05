@@ -1,6 +1,6 @@
 package com.company;
 
-public class Node {
+public class NodeForAVL {
     // data
     String name = null; // ID
     int age = 0;
@@ -8,13 +8,13 @@ public class Node {
     // attributes for working AVL
     int depth = 1;
     int balance = 0;
-    Node left = null;
-    Node right = null;
+    NodeForAVL left = null;
+    NodeForAVL right = null;
 
     // just for testing purpose
     boolean debug = false;
 
-    public Node getBiggerItem() {
+    public NodeForAVL getBiggerItem() {
         if (this.right == null) {
             if (this.left == null) {
                 return null;
@@ -30,9 +30,9 @@ public class Node {
             return this.left;
     }
 
-    public Node rebalanced() {
+    public NodeForAVL rebalanced() {
         // Refresh depth
-        Node biggerNode = this.getBiggerItem();
+        NodeForAVL biggerNode = this.getBiggerItem();
         if (biggerNode != null)
             this.setDepth(biggerNode.getDepth() + 1);
 
@@ -51,10 +51,10 @@ public class Node {
             left.right.increaseDepth();
 
             // Save all nodes
-            Node top = left;
-            Node bottom = left.right;
-            Node bottomLeft = left.right.left;
-            Node bottomRight = left.right.right;
+            NodeForAVL top = left;
+            NodeForAVL bottom = left.right;
+            NodeForAVL bottomLeft = left.right.left;
+            NodeForAVL bottomRight = left.right.right;
 
             // Switch nodes
             left = bottom;
@@ -73,10 +73,10 @@ public class Node {
             right.left.increaseDepth();
 
             // Save all nodes
-            Node top = right;
-            Node bottom = right.left;
-            Node bottomLeft = right.left.left;
-            Node bottomRight = right.left.right;
+            NodeForAVL top = right;
+            NodeForAVL bottom = right.left;
+            NodeForAVL bottomLeft = right.left.left;
+            NodeForAVL bottomRight = right.left.right;
 
             // Switch nodes
             right = bottom;
@@ -92,9 +92,9 @@ public class Node {
 
             this.decreaseDepth(2);
             balance = 0;
-            Node tempNodeRight = left.right;
+            NodeForAVL tempNodeRight = left.right;
             left.right = this;
-            Node tempNode = left;
+            NodeForAVL tempNode = left;
             left = tempNodeRight;
             return tempNode;
         }
@@ -105,9 +105,9 @@ public class Node {
 
             this.decreaseDepth(2);
             balance = 0;
-            Node tempNodeLeft = right.left;
+            NodeForAVL tempNodeLeft = right.left;
             right.left = this;
-            Node tempNode = right;
+            NodeForAVL tempNode = right;
             right = tempNodeLeft;
             return tempNode;
         }
@@ -115,7 +115,7 @@ public class Node {
         return this;
     }
 
-    public Node(String name, int age) {
+    public NodeForAVL(String name, int age) {
         this.name = name;
         this.age = age;
     }
@@ -140,15 +140,15 @@ public class Node {
         this.depth = this.depth - times;
     }
 
-    public Node getRight() {
+    public NodeForAVL getRight() {
         return right;
     }
 
-    public Node getLeft() {
+    public NodeForAVL getLeft() {
         return left;
     }
 
-    public void setRight(Node right) {
+    public void setRight(NodeForAVL right) {
         this.right = right;
     }
 

@@ -4,13 +4,13 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 public class MyAVL {
-    Node root = null;
+    NodeForAVL root = null;
 
     public void addItemsToTree(ArrayList<Person> items) throws IOException {
         long timeStarted = System.currentTimeMillis();
-        Node root = null;
+        NodeForAVL root = null;
         for (Person thisNode : items) {
-            root = addItem(root, new Node(thisNode.name, thisNode.age));
+            root = addItem(root, new NodeForAVL(thisNode.name, thisNode.age));
         }
 
         long timeFinished = System.currentTimeMillis();
@@ -18,7 +18,7 @@ public class MyAVL {
         this.root = root;
     }
 
-    public Node addItem(Node addTo, Node addThis) {
+    public NodeForAVL addItem(NodeForAVL addTo, NodeForAVL addThis) {
         if (addTo == null)
             addTo = addThis;
 
@@ -48,7 +48,7 @@ public class MyAVL {
         System.out.println(foundItems + "(/" + (upIndex - downIndex) + ") items was found in: " + (timeFinished - timeStarted) + " ms");
     }
 
-    public boolean findItem(String findThisName, Node findHere) {
+    public boolean findItem(String findThisName, NodeForAVL findHere) {
         boolean found = false;
         if (findHere.getName().equals(findThisName)) found = true;
 
@@ -68,7 +68,7 @@ public class MyAVL {
         System.out.println("===========================");
     }
 
-    public int printNode(Node thisNode, int count) {
+    public int printNode(NodeForAVL thisNode, int count) {
         if (thisNode != null) {
             count++;
             System.out.println(thisNode.getName() + "(" + thisNode.balance + "/" + thisNode.getDepth() + ")=> " + (thisNode.left != null ? thisNode.left.getName() : "-") + "/" + (thisNode.right != null ? thisNode.right.getName() : "-"));

@@ -19,12 +19,6 @@ public class Main {
         MyHashTable hashTable = new MyHashTable(200000);
         hashTable.addItemsToTree(importedItems);
         hashTable.searchManyItems(importedItems);
-
-//        hashTable.insert("Fero", 4);
-//        hashTable.insert("Fere", 12);
-//        System.out.println("Getting....");
-//        hashTable.get("Fero");
-//        hashTable.get("Fere");
     }
 
     public static ArrayList<Person> getItemFromCsvFile(String fileName) throws IOException {
