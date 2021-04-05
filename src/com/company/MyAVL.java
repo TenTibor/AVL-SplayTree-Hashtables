@@ -42,7 +42,7 @@ public class MyAVL {
         // Search any item in range
         int foundItems = 0;
         for (int i = downIndex; i < upIndex; i++) {
-            if (findItem(items.get(i).getName(), this.root)) foundItems++;
+            if (findItem(items.get(i).name, this.root)) foundItems++;
         }
         long timeFinished = System.currentTimeMillis();
         System.out.println(foundItems + "(/" + (upIndex - downIndex) + ") items was found in: " + (timeFinished - timeStarted) + " ms");

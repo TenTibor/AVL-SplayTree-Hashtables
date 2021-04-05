@@ -41,13 +41,20 @@ public class MyHashTable {
             itemOnIndex.print();
         else {
             int indexOfChaining = 0;
-            while (!itemOnIndex.chaining.get(indexOfChaining).getName().equals(key)){
+            while (!itemOnIndex.chaining.get(indexOfChaining).getName().equals(key)) {
                 indexOfChaining++;
             }
             itemOnIndex.chaining.get(indexOfChaining).print();
         }
     }
 
-    public void addItemsToTree(ArrayList<Node> importedItems) {
+    public void addItemsToTree(ArrayList<Person> importedItems) {
+        long timeStarted = System.currentTimeMillis();
+        for (Person thisPerson : importedItems) {
+            insert(thisPerson.name, thisPerson.age);
+        }
+        long timeFinished = System.currentTimeMillis();
+        System.out.println(importedItems.size() + " items was added in: " + (timeFinished - timeStarted) + " ms");
+
     }
 }

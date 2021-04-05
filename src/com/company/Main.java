@@ -8,16 +8,16 @@ public class Main {
         ArrayList<Person> importedItems = getItemFromCsvFile("test100k");
 
         // my implementation
-        System.out.println("====================");
-        System.out.println("AVL: Moja implementácia");
-        MyAVL myAVL = new MyAVL();
-        myAVL.addItemsToTree(importedItems);
-        myAVL.searchManyItems(importedItems);
+//        System.out.println("====================");
+//        System.out.println("AVL: Moja implementácia");
+//        MyAVL myAVL = new MyAVL();
+//        myAVL.addItemsToTree(importedItems);
+//        myAVL.searchManyItems(importedItems);
 
 //        System.out.println("====================");
         System.out.println("Hashovanie: Moja implementácia");
-        MyHashTable hashTable = new MyHashTable(5);
-//        hashTable.addItemsToTree(importedItems);
+        MyHashTable hashTable = new MyHashTable(200000);
+        hashTable.addItemsToTree(importedItems);
 //        hashTable.insert("Fero", 4);
 //        hashTable.insert("Fere", 12);
 //        System.out.println("Getting....");
