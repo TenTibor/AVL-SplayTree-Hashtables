@@ -20,7 +20,7 @@ public class MyHashTable {
         for (int i = 0; i < key.length(); i++) {
             finalHash = finalHash + key.charAt(i);
         }
-        System.out.println("hash:" + finalHash % size);
+//        System.out.println("hash:" + finalHash % size);
         return finalHash % size;
     }
 
@@ -29,22 +29,22 @@ public class MyHashTable {
         if (hashTable.get(index) == null) {
             hashTable.set(index, new PersonForHash(name, age));
         } else {
-            System.out.println("Chaining is happening");
+//            System.out.println("Chaining is happening");
             // chaining
             hashTable.get(index).chaining.add(new PersonForHash(name, age));
         }
     }
 
-    public void get(String key) {
+    public PersonForHash get(String key) {
         PersonForHash itemOnIndex = hashTable.get(hashIndex(key));
         if (itemOnIndex.chaining.size() == 0 || itemOnIndex.getName().equals(key))
-            itemOnIndex.print();
+            return itemOnIndex;
         else {
             int indexOfChaining = 0;
             while (!itemOnIndex.chaining.get(indexOfChaining).getName().equals(key)) {
                 indexOfChaining++;
             }
-            itemOnIndex.chaining.get(indexOfChaining).print();
+            return itemOnIndex.chaining.get(indexOfChaining);
         }
     }
 
@@ -55,6 +55,18 @@ public class MyHashTable {
         }
         long timeFinished = System.currentTimeMillis();
         System.out.println(importedItems.size() + " items was added in: " + (timeFinished - timeStarted) + " ms");
+    }
 
+    public void searchManyItems(ArrayList<Person> importedItems) {
+        long timeStarted = System.currentTimeMillis();
+        int searchedItems = 0;
+        int foundItems = 0;
+        for (int i = 0; i < importedItems.size(); i += 2) {
+            searchedItems++;
+            String searchedName = importedItems.get(i).name;
+            if (get(searchedName).getName().equals(searchedName)) foundItems++;
+        }
+        long timeFinished = System.currentTimeMillis();
+        System.out.println("(" + foundItems + "/" + searchedItems + ") items was found in: " + (timeFinished - timeStarted) + " ms");
     }
 }
