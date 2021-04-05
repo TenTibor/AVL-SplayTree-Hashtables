@@ -7,7 +7,6 @@ public class Main {
     public static void main(String[] args) throws IOException {
         ArrayList<Person> importedItems = getItemFromCsvFile("test100k");
 
-        // my implementation
         System.out.println("====================");
         System.out.println("AVL: Moja implementácia");
         MyAVL myAVL = new MyAVL();
@@ -16,7 +15,7 @@ public class Main {
 
         System.out.println("====================");
         System.out.println("Hashovanie: Moja implementácia");
-        MyHashTable hashTable = new MyHashTable(200000);
+        MyHashTable hashTable = new MyHashTable(100000);
         hashTable.addItemsToTree(importedItems);
         hashTable.searchManyItems(importedItems);
     }
@@ -31,7 +30,6 @@ public class Main {
             allNodes.add(newNode);
         }
         reader.close();
-//        System.out.println(allNodes.size() + " items was loaded.");
         return allNodes;
     }
 }

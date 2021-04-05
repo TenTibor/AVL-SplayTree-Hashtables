@@ -42,7 +42,7 @@ public class MyAVL {
             if (findItem(items.get(i).name, this.root)) foundItems++;
         }
         long timeFinished = System.currentTimeMillis();
-        System.out.println(foundItems + "(/" +searchedItems + ") items was found in: " + (timeFinished - timeStarted) + " ms");
+        System.out.println(foundItems + "(/" + searchedItems + ") items was found in: " + (timeFinished - timeStarted) + " ms");
     }
 
     public boolean findItem(String findThisName, NodeForAVL findHere) {

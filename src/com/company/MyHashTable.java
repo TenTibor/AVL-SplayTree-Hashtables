@@ -5,10 +5,12 @@ import java.util.ArrayList;
 public class MyHashTable {
     ArrayList<NodeForHash> hashTable;
     int size = 0;
+    int usedIndexes = 0;
+    int itemsInChain = 0;
 
     public MyHashTable(int size) {
         this.size = size;
-        hashTable = new ArrayList<>(size);
+        hashTable = new ArrayList<>();
         for (int i = 0; i < size; i++) {
             hashTable.add(null);
         }
@@ -28,9 +30,14 @@ public class MyHashTable {
         int index = hashIndex(name);
         if (hashTable.get(index) == null) {
             hashTable.set(index, new NodeForHash(name, age));
+//            freeIndexes--;
+            usedIndexes++;
+//            System.out.println((freeIndexes * 100) / size);
+//            if ((freeIndexes * 100) / size < 25)
+//                System.out.println((freeIndexes * 100) / size);
         } else {
-//            System.out.println("Chaining is happening");
             // chaining
+            itemsInChain++;
             hashTable.get(index).chaining.add(new NodeForHash(name, age));
         }
     }
@@ -48,6 +55,11 @@ public class MyHashTable {
         }
     }
 
+    public void resizeTable() {
+        int bonusCapacity = size / 3;
+        System.out.println(bonusCapacity);
+    }
+
     public void addItemsToTree(ArrayList<Person> importedItems) {
         long timeStarted = System.currentTimeMillis();
         for (Person thisPerson : importedItems) {
@@ -55,6 +67,8 @@ public class MyHashTable {
         }
         long timeFinished = System.currentTimeMillis();
         System.out.println(importedItems.size() + " items was added in: " + (timeFinished - timeStarted) + " ms");
+        System.out.println("Used indexes: " + usedIndexes);
+        System.out.println("Items in chains: " + itemsInChain);
     }
 
     public void searchManyItems(ArrayList<Person> importedItems) {
