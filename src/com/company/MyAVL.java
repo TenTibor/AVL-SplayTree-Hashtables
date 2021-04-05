@@ -34,18 +34,15 @@ public class MyAVL {
     public void searchManyItems(ArrayList<Person> items) {
         long timeStarted = System.currentTimeMillis();
 
-        // Pick some range
-        int countOfAllItems = items.size();
-        int downIndex = countOfAllItems / 4;
-        int upIndex = countOfAllItems / 3 + downIndex;
-
         // Search any item in range
         int foundItems = 0;
-        for (int i = downIndex; i < upIndex; i++) {
+        int searchedItems = 0;
+        for (int i = 0; i < items.size(); i += 2) {
+            searchedItems++;
             if (findItem(items.get(i).name, this.root)) foundItems++;
         }
         long timeFinished = System.currentTimeMillis();
-        System.out.println(foundItems + "(/" + (upIndex - downIndex) + ") items was found in: " + (timeFinished - timeStarted) + " ms");
+        System.out.println(foundItems + "(/" +searchedItems + ") items was found in: " + (timeFinished - timeStarted) + " ms");
     }
 
     public boolean findItem(String findThisName, NodeForAVL findHere) {

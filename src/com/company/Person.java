@@ -1,7 +1,7 @@
 package com.company;
 
 public class Person {
-    String name = null; // ID
+    String name = null;
     int age = 0;
 
     public Person(String name, int age) {
