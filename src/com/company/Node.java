@@ -1,7 +1,7 @@
 package com.company;
 
 public class Node {
-    // node data
+    // data
     String name = null; // ID
     int age = 0;
 
@@ -115,10 +115,6 @@ public class Node {
         return this;
     }
 
-    public Node(String name) {
-        this.name = name;
-    }
-
     public Node(String name, int age) {
         this.name = name;
         this.age = age;
@@ -158,14 +154,6 @@ public class Node {
 
     public String getName() {
         return name;
-    }
-
-    public int getAge() {
-        return age;
-    }
-
-    public String getItem() {
-        return "[" + getName() + ", " + getAge() + "years old]";
     }
 
 }
