@@ -5,19 +5,19 @@ import java.util.ArrayList;
 
 public class Main {
     public static void main(String[] args) throws IOException {
-        ArrayList<Node> importedItems = getItemFromCsvFile("test100k");
+        ArrayList<Person> importedItems = getItemFromCsvFile("test100k");
 
         // my implementation
-//        System.out.println("====================");
-//        System.out.println("AVL: Moja implementácia");
-//        MyAVL myAVL = new MyAVL();
-//        myAVL.addItemsToTree(importedItems);
-//        myAVL.searchManyItems(importedItems);
+        System.out.println("====================");
+        System.out.println("AVL: Moja implementácia");
+        MyAVL myAVL = new MyAVL();
+        myAVL.addItemsToTree(importedItems);
+        myAVL.searchManyItems(importedItems);
 
 //        System.out.println("====================");
         System.out.println("Hashovanie: Moja implementácia");
         MyHashTable hashTable = new MyHashTable(5);
-        hashTable.addItemsToTree(importedItems);
+//        hashTable.addItemsToTree(importedItems);
 //        hashTable.insert("Fero", 4);
 //        hashTable.insert("Fere", 12);
 //        System.out.println("Getting....");
@@ -25,13 +25,13 @@ public class Main {
 //        hashTable.get("Fere");
     }
 
-    public static ArrayList<Node> getItemFromCsvFile(String fileName) throws IOException {
+    public static ArrayList<Person> getItemFromCsvFile(String fileName) throws IOException {
         BufferedReader reader = new BufferedReader(new FileReader("src/com/company/tests/" + fileName + ".csv"));
         String line;
-        ArrayList<Node> allNodes = new ArrayList<Node>();
+        ArrayList<Person> allNodes = new ArrayList<Person>();
         while ((line = reader.readLine()) != null) {
             String[] data = line.split(",");
-            Node newNode = new Node(data[0], Integer.parseInt(data[1]));
+            Person newNode = new Person(data[0], Integer.parseInt(data[1]));
             allNodes.add(newNode);
         }
         reader.close();

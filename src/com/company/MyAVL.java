@@ -6,11 +6,11 @@ import java.util.ArrayList;
 public class MyAVL {
     Node root = null;
 
-    public void addItemsToTree(ArrayList<Node> items) throws IOException {
+    public void addItemsToTree(ArrayList<Person> items) throws IOException {
         long timeStarted = System.currentTimeMillis();
         Node root = null;
-        for (Node thisNode : items) {
-            root = addItem(root, thisNode);
+        for (Person thisNode : items) {
+            root = addItem(root, new Node(thisNode.name, thisNode.age));
         }
 
         long timeFinished = System.currentTimeMillis();
@@ -31,7 +31,7 @@ public class MyAVL {
         return addTo.rebalanced();
     }
 
-    public void searchManyItems(ArrayList<Node> items) {
+    public void searchManyItems(ArrayList<Person> items) {
         long timeStarted = System.currentTimeMillis();
 
         // Pick some range
