@@ -15,9 +15,9 @@ public class Main {
 
         System.out.println("====================");
         System.out.println("Hashovanie: Moja implementácia");
-        MyHashTable hashTable = new MyHashTable(200000);
-        hashTable.addItemsToTree(importedItems);
-        hashTable.searchManyItems(importedItems);
+        MyHashTable myHashTable = new MyHashTable(200000);
+        myHashTable.addItemsToTree(importedItems);
+        myHashTable.searchManyItems(importedItems);
     }
 
     public static ArrayList<Person> getItemFromCsvFile(String fileName) throws IOException {

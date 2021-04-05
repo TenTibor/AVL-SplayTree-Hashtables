@@ -20,11 +20,8 @@ public class MyHashTable {
         // Calculate hash by sum of letters.. But modulo size for staying in list capacity
         int finalHash = key.length();
         for (int i = 0; i < key.length(); i++) {
-//            System.out.println(finalHash);
-            finalHash = finalHash * key.charAt(i) + key.charAt(i);
+            finalHash = finalHash * key.charAt(i) + key.charAt(i) + i * finalHash;
         }
-//        System.out.println("hash:" + finalHash % size);
-//        System.out.println(finalHash % size);
         return Math.abs(finalHash % size);
     }
 
@@ -32,11 +29,11 @@ public class MyHashTable {
         int index = hash(name);
         if (hashTable.get(index) == null) {
             hashTable.set(index, new NodeForHash(name, age));
-//            freeIndexes--;
             usedIndexes++;
-//            System.out.println((freeIndexes * 100) / size);
-//            if ((freeIndexes * 100) / size < 25)
-//                System.out.println((freeIndexes * 100) / size);
+
+            // if we need resize
+            if (usedIndexes > size / 2)
+                System.out.println(usedIndexes);
         } else {
             // chaining
             itemsInChain++;
