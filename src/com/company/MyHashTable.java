@@ -22,6 +22,8 @@ public class MyHashTable {
         for (int i = 0; i < key.length(); i++) {
             finalHash = finalHash * key.charAt(i) + key.charAt(i) + i * finalHash;
         }
+//        System.out.println(Math.abs(finalHash % size));
+
         return Math.abs(finalHash % size);
     }
 
@@ -32,9 +34,9 @@ public class MyHashTable {
             usedIndexes++;
 
             // if we need resize
-            if (usedIndexes > size / 2)
-                System.out.println(usedIndexes);
-        } else {
+//            if (usedIndexes > size / 2)
+//                resizeTable();
+        } else if (!hashTable.get(index).getName().equals(name)) {
             // chaining
             itemsInChain++;
             hashTable.get(index).chaining.add(new NodeForHash(name, age));
@@ -56,7 +58,11 @@ public class MyHashTable {
 
     public void resizeTable() {
         int bonusCapacity = size / 3;
-        System.out.println(bonusCapacity);
+//        System.out.println("Resize with: " + bonusCapacity);
+        for (int i = 0; i < bonusCapacity; i++) {
+            hashTable.add(null);
+        }
+//        this.size += bonusCapacity;
     }
 
     public void addItemsToTree(ArrayList<Person> importedItems) {

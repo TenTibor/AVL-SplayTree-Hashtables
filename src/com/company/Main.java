@@ -15,7 +15,7 @@ public class Main {
 
         System.out.println("====================");
         System.out.println("Hashovanie: Moja implementácia");
-        MyHashTable myHashTable = new MyHashTable(200000);
+        MyHashTable myHashTable = new MyHashTable(100000);
         myHashTable.addItemsToTree(importedItems);
         myHashTable.searchManyItems(importedItems);
     }
