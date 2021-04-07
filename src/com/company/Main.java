@@ -5,7 +5,7 @@ import java.util.ArrayList;
 
 public class Main {
     public static void main(String[] args) throws IOException {
-        ArrayList<Person> importedItems = getItemFromCsvFile("test100k");
+        ArrayList<Person> importedItems = getItemFromCsvFile("test10k");
 
         System.out.println("====================");
         System.out.println("AVL: Moja implementácia");
@@ -15,7 +15,7 @@ public class Main {
 
         System.out.println("====================");
         System.out.println("Hashovanie: Moja implementácia");
-        MyHashTable myHashTable = new MyHashTable(100000);
+        MyHashTable myHashTable = new MyHashTable(10000);
         myHashTable.addItemsToTree(importedItems);
         myHashTable.searchManyItems(importedItems);
     }

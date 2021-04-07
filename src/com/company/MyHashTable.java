@@ -3,48 +3,48 @@ package com.company;
 import java.util.ArrayList;
 
 public class MyHashTable {
-    ArrayList<NodeForHash> hashTable;
+    NodeForHash[] hashTable;
     int size = 0;
     int usedIndexes = 0;
     int itemsInChain = 0;
 
     public MyHashTable(int size) {
         this.size = size;
-        hashTable = new ArrayList<>();
-        for (int i = 0; i < size; i++) {
-            hashTable.add(null);
-        }
+        hashTable = new NodeForHash[size];
+//        for (int i = 0; i < size; i++) {
+//            hashTable.add(null);
+//        }
     }
 
     public int hash(String key) {
         // Calculate hash by sum of letters.. But modulo size for staying in list capacity
         int finalHash = key.length();
         for (int i = 0; i < key.length(); i++) {
-            finalHash = finalHash * key.charAt(i) + key.charAt(i) + i * finalHash;
+            finalHash = finalHash * key.charAt(0) + key.charAt(i) + i * finalHash;
         }
-//        System.out.println(Math.abs(finalHash % size));
+//        System.out.println(Math.abs11(finalHash % size));
 
         return Math.abs(finalHash % size);
     }
 
     public void insert(String name, int age) {
         int index = hash(name);
-        if (hashTable.get(index) == null) {
-            hashTable.set(index, new NodeForHash(name, age));
+        if (hashTable[index] == null) {
+            hashTable[index] = new NodeForHash(name, age);
             usedIndexes++;
 
             // if we need resize
-//            if (usedIndexes > size / 2)
-//                resizeTable();
-        } else if (!hashTable.get(index).getName().equals(name)) {
+            if (usedIndexes > size / 2)
+                resizeTable();
+        } else if (!hashTable[index].getName().equals(name)) {
             // chaining
             itemsInChain++;
-            hashTable.get(index).chaining.add(new NodeForHash(name, age));
+            hashTable[index].chaining.add(new NodeForHash(name, age));
         }
     }
 
     public NodeForHash get(String key) {
-        NodeForHash itemOnIndex = hashTable.get(hash(key));
+        NodeForHash itemOnIndex = hashTable[hash(key)];
         if (itemOnIndex.chaining.size() == 0 || itemOnIndex.getName().equals(key))
             return itemOnIndex;
         else {
@@ -58,10 +58,11 @@ public class MyHashTable {
 
     public void resizeTable() {
         int bonusCapacity = size / 3;
-//        System.out.println("Resize with: " + bonusCapacity);
-        for (int i = 0; i < bonusCapacity; i++) {
-            hashTable.add(null);
-        }
+
+        System.out.println("Resize with: " + bonusCapacity);
+//        for (int i = 0; i < bonusCapacity; i++) {
+//            hashTable.add(null);
+//        }
 //        this.size += bonusCapacity;
     }
 
@@ -72,8 +73,8 @@ public class MyHashTable {
         }
         long timeFinished = System.currentTimeMillis();
         System.out.println(importedItems.size() + " items was added in: " + (timeFinished - timeStarted) + " ms");
-        System.out.println("Used indexes: " + usedIndexes);
-        System.out.println("Items in chains: " + itemsInChain);
+        System.out.println("Unique keys: " + usedIndexes);
+        System.out.println("Duplicated keys: " + itemsInChain);
     }
 
     public void searchManyItems(ArrayList<Person> importedItems) {
