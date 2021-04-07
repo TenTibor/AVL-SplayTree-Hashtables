@@ -25,6 +25,8 @@ public class Main {
         System.out.println("====================");
         System.out.println("Hashovanie: Cudzia implementácia");
         Hashtable<String, Person> hashtable = importItemsFromFile(importedItems);
+        takenHashTableSearchManyItems(hashtable, importedItems);
+
     }
 
     public static ArrayList<Person> getItemFromCsvFile(String fileName) throws IOException {
@@ -69,7 +71,7 @@ public class Main {
         System.out.println("(" + foundItems + "/" + searchedItems + ") items was found in: " + (timeFinished - timeStarted) + " ms");
     }
 
-    // add many items to prevzatu implementaciu
+    // add many items to taken implementation
     public static Hashtable<String, Person> importItemsFromFile(ArrayList<Person> importedItems) {
         Hashtable<String, Person> hashtable = new Hashtable<>();
 
@@ -82,4 +84,18 @@ public class Main {
         return hashtable;
     }
 
+    // search many items in taken implementation
+
+    private static void takenHashTableSearchManyItems(Hashtable<String, Person> hashtable, ArrayList<Person> importedItems) {
+        long timeStarted = System.currentTimeMillis();
+        int searchedItems = 0;
+        int foundItems = 0;
+        for (int i = 0; i < importedItems.size(); i += 2) {
+            searchedItems++;
+            String searchedName = importedItems.get(i).name;
+            if (hashtable.get(searchedName).getName().equals(searchedName)) foundItems++;
+        }
+        long timeFinished = System.currentTimeMillis();
+        System.out.println("(" + foundItems + "/" + searchedItems + ") items was found in: " + (timeFinished - timeStarted) + " ms");
+    }
 }
