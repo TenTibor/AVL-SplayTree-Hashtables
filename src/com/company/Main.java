@@ -1,7 +1,10 @@
 package com.company;
 
-import java.io.*;
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Hashtable;
 
 public class Main {
     public static void main(String[] args) throws IOException {
@@ -18,6 +21,10 @@ public class Main {
         MyHashTable myHashTable = new MyHashTable(100000);
         myHashTable.addManyItems(importedItems);
         hashTableSearchManyItems(myHashTable, importedItems);
+
+        System.out.println("====================");
+        System.out.println("Hashovanie: Cudzia implementácia");
+        Hashtable<String, Person> hashtable = importItemsFromFile(importedItems);
     }
 
     public static ArrayList<Person> getItemFromCsvFile(String fileName) throws IOException {
@@ -33,19 +40,7 @@ public class Main {
         return allNodes;
     }
 
-    public static void hashTableSearchManyItems(MyHashTable table, ArrayList<Person> importedItems) {
-        long timeStarted = System.currentTimeMillis();
-        int searchedItems = 0;
-        int foundItems = 0;
-        for (int i = 0; i < importedItems.size(); i += 2) {
-            searchedItems++;
-            String searchedName = importedItems.get(i).name;
-            if (table.get(searchedName).getName().equals(searchedName)) foundItems++;
-        }
-        long timeFinished = System.currentTimeMillis();
-        System.out.println("(" + foundItems + "/" + searchedItems + ") items was found in: " + (timeFinished - timeStarted) + " ms");
-    }
-
+    // search many items in AVL
     public static void AVLSearchManyItems(MyAVL avl, ArrayList<Person> items) {
         long timeStarted = System.currentTimeMillis();
 
@@ -59,4 +54,32 @@ public class Main {
         long timeFinished = System.currentTimeMillis();
         System.out.println(foundItems + "(/" + searchedItems + ") items was found in: " + (timeFinished - timeStarted) + " ms");
     }
+
+    // search many items in my hashtable
+    public static void hashTableSearchManyItems(MyHashTable table, ArrayList<Person> importedItems) {
+        long timeStarted = System.currentTimeMillis();
+        int searchedItems = 0;
+        int foundItems = 0;
+        for (int i = 0; i < importedItems.size(); i += 2) {
+            searchedItems++;
+            String searchedName = importedItems.get(i).name;
+            if (table.get(searchedName).getName().equals(searchedName)) foundItems++;
+        }
+        long timeFinished = System.currentTimeMillis();
+        System.out.println("(" + foundItems + "/" + searchedItems + ") items was found in: " + (timeFinished - timeStarted) + " ms");
+    }
+
+    // add many items to prevzatu implementaciu
+    public static Hashtable<String, Person> importItemsFromFile(ArrayList<Person> importedItems) {
+        Hashtable<String, Person> hashtable = new Hashtable<>();
+
+        long timeStarted = System.currentTimeMillis();
+        for (Person thisPerson : importedItems)
+            hashtable.put(thisPerson.getName(), new Person(thisPerson.getName(), thisPerson.getAge()));
+
+        long timeFinished = System.currentTimeMillis();
+        System.out.println(importedItems.size() + " items was added in: " + (timeFinished - timeStarted) + " ms");
+        return hashtable;
+    }
+
 }
