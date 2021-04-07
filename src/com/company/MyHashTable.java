@@ -35,7 +35,10 @@ public class MyHashTable {
             if (usedIndexes > size / 2)
                 resizeTable();
         } else if (!hashTable[index].getName().equals(name)) {
-            // chaining
+            // Check if items is not exist in chain
+            for (NodeForHash item : hashTable[index].chaining) {
+                if (item.getName().equals(name)) return;
+            }
             itemsInChain++;
             hashTable[index].chaining.add(new NodeForHash(name, age));
         }
