@@ -16,8 +16,8 @@ public class Main {
         System.out.println("====================");
         System.out.println("Hashovanie: Moja implementácia");
         MyHashTable myHashTable = new MyHashTable(100000);
-        myHashTable.addItemsToTree(importedItems);
-        myHashTable.searchManyItems(importedItems);
+        myHashTable.addManyItems(importedItems);
+        hashtableSearchManyItems(myHashTable, importedItems);
     }
 
     public static ArrayList<Person> getItemFromCsvFile(String fileName) throws IOException {
@@ -31,5 +31,18 @@ public class Main {
         }
         reader.close();
         return allNodes;
+    }
+
+    public static void hashtableSearchManyItems(MyHashTable table, ArrayList<Person> importedItems) {
+        long timeStarted = System.currentTimeMillis();
+        int searchedItems = 0;
+        int foundItems = 0;
+        for (int i = 0; i < importedItems.size(); i += 2) {
+            searchedItems++;
+            String searchedName = importedItems.get(i).name;
+            if (table.get(searchedName).getName().equals(searchedName)) foundItems++;
+        }
+        long timeFinished = System.currentTimeMillis();
+        System.out.println("(" + foundItems + "/" + searchedItems + ") items was found in: " + (timeFinished - timeStarted) + " ms");
     }
 }

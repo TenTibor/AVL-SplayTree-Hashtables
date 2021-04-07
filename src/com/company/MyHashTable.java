@@ -78,7 +78,7 @@ public class MyHashTable {
         }
     }
 
-    public void addItemsToTree(ArrayList<Person> importedItems) {
+    public void addManyItems(ArrayList<Person> importedItems) {
         long timeStarted = System.currentTimeMillis();
         for (Person thisPerson : importedItems) {
             insert(thisPerson.name, thisPerson.age);
@@ -87,19 +87,5 @@ public class MyHashTable {
         System.out.println(importedItems.size() + " items was added in: " + (timeFinished - timeStarted) + " ms");
         System.out.println("Unique keys: " + usedIndexes);
         System.out.println("Duplicated keys: " + itemsInChain);
-    }
-
-    public void searchManyItems(ArrayList<Person> importedItems) {
-        long timeStarted = System.currentTimeMillis();
-        int searchedItems = 0;
-        int foundItems = 0;
-        for (int i = 0; i < importedItems.size(); i++) {
-            searchedItems++;
-            String searchedName = importedItems.get(i).name;
-//            if (get(searchedName) != null) foundItems++;
-            if (get(searchedName) != null && get(searchedName).getName().equals(searchedName)) foundItems++;
-        }
-        long timeFinished = System.currentTimeMillis();
-        System.out.println("(" + foundItems + "/" + searchedItems + ") items was found in: " + (timeFinished - timeStarted) + " ms");
     }
 }
