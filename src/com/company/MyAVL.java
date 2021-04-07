@@ -31,20 +31,6 @@ public class MyAVL {
         return addTo.rebalanced();
     }
 
-    public void searchManyItems(ArrayList<Person> items) {
-        long timeStarted = System.currentTimeMillis();
-
-        // Search any item in range
-        int foundItems = 0;
-        int searchedItems = 0;
-        for (int i = 0; i < items.size(); i += 2) {
-            searchedItems++;
-            if (findItem(items.get(i).name, this.root)) foundItems++;
-        }
-        long timeFinished = System.currentTimeMillis();
-        System.out.println(foundItems + "(/" + searchedItems + ") items was found in: " + (timeFinished - timeStarted) + " ms");
-    }
-
     public boolean findItem(String findThisName, NodeForAVL findHere) {
         boolean found = false;
         if (findHere.getName().equals(findThisName)) found = true;

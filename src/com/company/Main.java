@@ -11,13 +11,13 @@ public class Main {
         System.out.println("AVL: Moja implementácia");
         MyAVL myAVL = new MyAVL();
         myAVL.addItemsToTree(importedItems);
-        myAVL.searchManyItems(importedItems);
+        AVLSearchManyItems(myAVL, importedItems);
 
         System.out.println("====================");
         System.out.println("Hashovanie: Moja implementácia");
         MyHashTable myHashTable = new MyHashTable(100000);
         myHashTable.addManyItems(importedItems);
-        hashtableSearchManyItems(myHashTable, importedItems);
+        hashTableSearchManyItems(myHashTable, importedItems);
     }
 
     public static ArrayList<Person> getItemFromCsvFile(String fileName) throws IOException {
@@ -33,7 +33,7 @@ public class Main {
         return allNodes;
     }
 
-    public static void hashtableSearchManyItems(MyHashTable table, ArrayList<Person> importedItems) {
+    public static void hashTableSearchManyItems(MyHashTable table, ArrayList<Person> importedItems) {
         long timeStarted = System.currentTimeMillis();
         int searchedItems = 0;
         int foundItems = 0;
@@ -44,5 +44,19 @@ public class Main {
         }
         long timeFinished = System.currentTimeMillis();
         System.out.println("(" + foundItems + "/" + searchedItems + ") items was found in: " + (timeFinished - timeStarted) + " ms");
+    }
+
+    public static void AVLSearchManyItems(MyAVL avl, ArrayList<Person> items) {
+        long timeStarted = System.currentTimeMillis();
+
+        // Search any item in range
+        int foundItems = 0;
+        int searchedItems = 0;
+        for (int i = 0; i < items.size(); i += 2) {
+            searchedItems++;
+            if (avl.findItem(items.get(i).name, avl.root)) foundItems++;
+        }
+        long timeFinished = System.currentTimeMillis();
+        System.out.println(foundItems + "(/" + searchedItems + ") items was found in: " + (timeFinished - timeStarted) + " ms");
     }
 }
