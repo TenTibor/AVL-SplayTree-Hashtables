@@ -11,15 +11,13 @@ public class MyHashTable {
     public MyHashTable(int size) {
         this.size = size;
         hashTable = new NodeForHash[size];
-//        for (int i = 0; i < size; i++) {
-//            hashTable.add(null);
-//        }
     }
 
     public int hash(String key) {
         // Calculate hash by sum of letters.. But modulo size for staying in list capacity
         int finalHash = key.length();
         for (int i = 0; i < key.length(); i++) {
+//            finalHash = finalHash + key.charAt(i);
             finalHash = finalHash * key.charAt(0) + key.charAt(i) + i * finalHash;
         }
 //        System.out.println(Math.abs11(finalHash % size));
@@ -45,25 +43,36 @@ public class MyHashTable {
 
     public NodeForHash get(String key) {
         NodeForHash itemOnIndex = hashTable[hash(key)];
-        if (itemOnIndex.chaining.size() == 0 || itemOnIndex.getName().equals(key))
+        if (itemOnIndex == null) return null;
+        if (itemOnIndex.getName().equals(key))
             return itemOnIndex;
-        else {
+        else if (itemOnIndex.chaining.size() > 0) {
             int indexOfChaining = 0;
             while (!itemOnIndex.chaining.get(indexOfChaining).getName().equals(key)) {
                 indexOfChaining++;
             }
             return itemOnIndex.chaining.get(indexOfChaining);
         }
+        return null;
     }
 
     public void resizeTable() {
-        int bonusCapacity = size / 3;
+        int bonusCapacity = size / 2;
+        this.size = size + bonusCapacity;
+        NodeForHash[] oldData = hashTable;
+        NodeForHash[] newHashTable = new NodeForHash[size];
+        this.hashTable = newHashTable;
 
-        System.out.println("Resize with: " + bonusCapacity);
-//        for (int i = 0; i < bonusCapacity; i++) {
-//            hashTable.add(null);
-//        }
-//        this.size += bonusCapacity;
+        for (NodeForHash item : oldData) {
+            if (item != null) {
+                if (item.chaining.size() > 0) {
+                    for (int i = 0; i < item.chaining.size(); i++) {
+                        insert(item.chaining.get(i).getName(), item.chaining.get(i).getAge());
+                    }
+                }
+                insert(item.getName(), item.getAge());
+            }
+        }
     }
 
     public void addItemsToTree(ArrayList<Person> importedItems) {
@@ -81,10 +90,11 @@ public class MyHashTable {
         long timeStarted = System.currentTimeMillis();
         int searchedItems = 0;
         int foundItems = 0;
-        for (int i = 0; i < importedItems.size(); i += 2) {
+        for (int i = 0; i < importedItems.size(); i++) {
             searchedItems++;
             String searchedName = importedItems.get(i).name;
-            if (get(searchedName).getName().equals(searchedName)) foundItems++;
+//            if (get(searchedName) != null) foundItems++;
+            if (get(searchedName) != null && get(searchedName).getName().equals(searchedName)) foundItems++;
         }
         long timeFinished = System.currentTimeMillis();
         System.out.println("(" + foundItems + "/" + searchedItems + ") items was found in: " + (timeFinished - timeStarted) + " ms");

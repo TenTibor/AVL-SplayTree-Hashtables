@@ -7,10 +7,6 @@ public class NodeForHash {
     private int age = 0;
     ArrayList<NodeForHash> chaining = new ArrayList<>();
 
-    public NodeForHash() {
-
-    }
-
     public NodeForHash(String name, int age) {
         this.name = name;
         this.age = age;
@@ -22,5 +18,9 @@ public class NodeForHash {
 
     public String getName() {
         return name;
+    }
+
+    public int getAge() {
+        return age;
     }
 }
