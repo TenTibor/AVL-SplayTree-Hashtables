@@ -3,12 +3,12 @@ package com.company;
 //    Zdroj
 //    https://www.algolist.net/Data_structures/Hash_table/Open_addressing
 
-public class AddressingHashtable<K, V> {
+public class Addressing<K, V> {
     private int tableSize = 0;
 
     HashEntry[] table;
 
-    AddressingHashtable(int size) {
+    Addressing(int size) {
         tableSize = (int) (size + (size * 0.2));
         table = new HashEntry[tableSize];
 

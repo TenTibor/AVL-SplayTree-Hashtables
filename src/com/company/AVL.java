@@ -1,12 +1,7 @@
 package com.company;
 
-import java.io.IOException;
-import java.util.ArrayList;
-
-public class MyAVL {
+public class AVL {
     NodeForAVL root = null;
-
-
 
     public NodeForAVL addItem(NodeForAVL addTo, NodeForAVL addThis) {
         if (addTo == null)

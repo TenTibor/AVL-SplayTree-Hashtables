@@ -11,27 +11,26 @@ public class Main {
 
         System.out.println("====================");
         System.out.println("Trees: AVL");
-        MyAVL myAVL = new MyAVL();
-        insertItemsToAVL(myAVL, importedItems);
-        AVLSearchManyItems(myAVL, importedItems);
+        AVL AVL = new AVL();
+        AVLInsertItems(AVL, importedItems);
+        AVLSearchItems(AVL, importedItems);
 
         System.out.println("====================");
         System.out.println("Trees: Splay Tree");
         SplayTree splayTree = new SplayTree();
-        insertItemsToSplayTree(splayTree, importedItems);
-        SplayTreeSearchManyItems(splayTree, importedItems);
+        splayTreeInsertItems(splayTree, importedItems);
+        splayTreeSearchItems(splayTree, importedItems);
 
         System.out.println("====================");
         System.out.println("Hashtable: Chaining");
-        MyHashTable myHashTable = new MyHashTable(importedItems.size());
-        myHashTable.addManyItems(importedItems);
-        hashTableSearchManyItems(myHashTable, importedItems);
+        Chaining chaining = new Chaining(importedItems.size());
+        chainingInsertItems(chaining, importedItems);
+        chainingSearchItems(chaining, importedItems);
 
         System.out.println("====================");
         System.out.println("Hashtable: Open addressing");
-        AddressingHashtable<String, Person> addressingHashtable = importItemsFromFile(importedItems);
-        takenHashTableSearchManyItems(addressingHashtable, importedItems);
-
+        Addressing<String, Person> addressing = importItemsFromFile(importedItems);
+        addressingSearchItems(addressing, importedItems);
     }
 
     public static ArrayList<Person> getItemFromCsvFile(String fileName) throws IOException {
@@ -48,21 +47,21 @@ public class Main {
     }
 
     // insert many items to AVL
-    public static void insertItemsToAVL(MyAVL myAVL, ArrayList<Person> items) throws IOException {
+    public static void AVLInsertItems(AVL AVL, ArrayList<Person> items) throws IOException {
         long timeStarted = System.currentTimeMillis();
 
         NodeForAVL root = null;
         for (Person thisNode : items) {
-            root = myAVL.addItem(root, new NodeForAVL(thisNode.name, thisNode.age));
+            root = AVL.addItem(root, new NodeForAVL(thisNode.name, thisNode.age));
         }
 
         long timeFinished = System.currentTimeMillis();
         System.out.println(items.size() + " items was added in " + (timeFinished - timeStarted) + " ms");
-        myAVL.root = root;
+        AVL.root = root;
     }
 
     // search many items in AVL
-    public static void AVLSearchManyItems(MyAVL avl, ArrayList<Person> items) {
+    public static void AVLSearchItems(AVL avl, ArrayList<Person> items) {
         long timeStarted = System.currentTimeMillis();
 
         // Search any item in range
@@ -77,7 +76,7 @@ public class Main {
     }
 
     // insert many items to SplayTree
-    public static void insertItemsToSplayTree(SplayTree myAVL, ArrayList<Person> items) throws IOException {
+    public static void splayTreeInsertItems(SplayTree myAVL, ArrayList<Person> items) throws IOException {
         long timeStarted = System.currentTimeMillis();
 
         for (Person thisNode : items) {
@@ -89,7 +88,7 @@ public class Main {
     }
 
     // search many items in Splay Tree
-    public static void SplayTreeSearchManyItems(SplayTree avl, ArrayList<Person> items) {
+    public static void splayTreeSearchItems(SplayTree avl, ArrayList<Person> items) {
         long timeStarted = System.currentTimeMillis();
 
         // Search any item in range
@@ -103,8 +102,20 @@ public class Main {
         System.out.println(foundItems + "(/" + searchedItems + ") items was found in: " + (timeFinished - timeStarted) + " ms");
     }
 
-    // search many items in my hashtable
-    public static void hashTableSearchManyItems(MyHashTable table, ArrayList<Person> importedItems) {
+    // insert many items to chaining hashtable
+    public static void chainingInsertItems(Chaining chaining, ArrayList<Person> importedItems) {
+        long timeStarted = System.currentTimeMillis();
+        for (Person thisPerson : importedItems) {
+            chaining.insert(thisPerson.name, thisPerson.age);
+        }
+        long timeFinished = System.currentTimeMillis();
+        System.out.println(importedItems.size() + " items was added in: " + (timeFinished - timeStarted) + " ms");
+        System.out.println("Unique keys: " + chaining.usedIndexes);
+        System.out.println("Duplicated keys: " + chaining.itemsInChain);
+    }
+
+    // search many items in chaining hashtable
+    public static void chainingSearchItems(Chaining table, ArrayList<Person> importedItems) {
         long timeStarted = System.currentTimeMillis();
         int searchedItems = 0;
         int foundItems = 0;
@@ -117,22 +128,8 @@ public class Main {
         System.out.println("(" + foundItems + "/" + searchedItems + ") items was found in: " + (timeFinished - timeStarted) + " ms");
     }
 
-    // add many items to taken implementation
-    public static AddressingHashtable<String, Person> importItemsFromFile(ArrayList<Person> importedItems) {
-        AddressingHashtable<String, Person> hashtable = new AddressingHashtable<>(importedItems.size());
-
-        long timeStarted = System.currentTimeMillis();
-        for (Person thisPerson : importedItems) {
-            hashtable.put(thisPerson.getName(), new Person(thisPerson.getName(), thisPerson.getAge()));
-        }
-
-        long timeFinished = System.currentTimeMillis();
-        System.out.println(importedItems.size() + " items was added in: " + (timeFinished - timeStarted) + " ms");
-        return hashtable;
-    }
-
     // search many items in taken implementation
-    private static void takenHashTableSearchManyItems(AddressingHashtable<String, Person> table, ArrayList<Person> importedItems) {
+    private static void addressingSearchItems(Addressing<String, Person> table, ArrayList<Person> importedItems) {
         long timeStarted = System.currentTimeMillis();
         int searchedItems = 0;
         int foundItems = 0;
@@ -144,5 +141,19 @@ public class Main {
         }
         long timeFinished = System.currentTimeMillis();
         System.out.println("(" + foundItems + "/" + searchedItems + ") items was found in: " + (timeFinished - timeStarted) + " ms");
+    }
+
+    // add many items to taken implementation
+    public static Addressing<String, Person> importItemsFromFile(ArrayList<Person> importedItems) {
+        Addressing<String, Person> hashtable = new Addressing<>(importedItems.size());
+
+        long timeStarted = System.currentTimeMillis();
+        for (Person thisPerson : importedItems) {
+            hashtable.put(thisPerson.getName(), new Person(thisPerson.getName(), thisPerson.getAge()));
+        }
+
+        long timeFinished = System.currentTimeMillis();
+        System.out.println(importedItems.size() + " items was added in: " + (timeFinished - timeStarted) + " ms");
+        return hashtable;
     }
 }

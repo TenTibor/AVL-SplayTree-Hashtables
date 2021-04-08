@@ -1,14 +1,12 @@
 package com.company;
 
-import java.util.ArrayList;
-
-public class MyHashTable {
+public class Chaining {
     NodeForHash[] hashTable;
     int size = 0;
     int usedIndexes = 0;
     int itemsInChain = 0;
 
-    public MyHashTable(int size) {
+    public Chaining(int size) {
         this.size = size;
         hashTable = new NodeForHash[size];
     }
@@ -73,16 +71,5 @@ public class MyHashTable {
                 insert(item.getName(), item.getAge());
             }
         }
-    }
-
-    public void addManyItems(ArrayList<Person> importedItems) {
-        long timeStarted = System.currentTimeMillis();
-        for (Person thisPerson : importedItems) {
-            insert(thisPerson.name, thisPerson.age);
-        }
-        long timeFinished = System.currentTimeMillis();
-        System.out.println(importedItems.size() + " items was added in: " + (timeFinished - timeStarted) + " ms");
-        System.out.println("Unique keys: " + usedIndexes);
-        System.out.println("Duplicated keys: " + itemsInChain);
     }
 }
