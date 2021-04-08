@@ -1,18 +1,17 @@
 package com.company;
 
+//    Zdroj
+//    https://www.algolist.net/Data_structures/Hash_table/Open_addressing
 public class AddressingHashtable<K, V> {
     private int tableSize = 0;
-//    https://www.algolist.net/Data_structures/Hash_table/Open_addressing
 
     HashEntry[] table;
-
 
     AddressingHashtable(int size) {
         tableSize = (int) (size + (size * 0.2));
         table = new HashEntry[tableSize];
 
         for (int i = 0; i < tableSize; i++)
-
             table[i] = null;
 
     }
@@ -21,7 +20,6 @@ public class AddressingHashtable<K, V> {
     public Person get(String key) {
 
         int hash = (h(key) % tableSize);
-
         int initialHash = -1;
 
         while (hash != initialHash
@@ -35,11 +33,8 @@ public class AddressingHashtable<K, V> {
         }
 
         if (table[hash] == null || hash == initialHash)
-
             return null;
-
         else
-
             return table[hash].getValue();
 
     }
@@ -61,66 +56,44 @@ public class AddressingHashtable<K, V> {
 
         int indexOfDeletedEntry = -1;
         while (hash != initialHash
-
                 && (table[hash] == DeletedEntry.getUniqueDeletedEntry() || table[hash] != null
-
                 && table[hash].getKey() != key)) {
 
             if (initialHash == -1)
-
                 initialHash = hash;
 
             if (table[hash] == DeletedEntry.getUniqueDeletedEntry())
-
                 indexOfDeletedEntry = hash;
 
             hash = (hash + 1) % tableSize;
         }
-        if ((table[hash] == null || hash == initialHash)
-
-                && indexOfDeletedEntry != -1)
-
+        if ((table[hash] == null || hash == initialHash) && indexOfDeletedEntry != -1)
             table[indexOfDeletedEntry] = new HashEntry(key, value);
 
         else if (initialHash != hash)
-
-            if (table[hash] != DeletedEntry.getUniqueDeletedEntry()
-
-                    && table[hash] != null && table[hash].getKey() == key)
-
+            if (table[hash] != DeletedEntry.getUniqueDeletedEntry() && table[hash] != null && table[hash].getKey() == key)
                 table[hash].setValue(value);
-
             else
-
                 table[hash] = new HashEntry(key, value);
-
     }
 
 
     public void remove(String key) {
 
         int hash = (h(key) % tableSize);
-
         int initialHash = -1;
 
         while (hash != initialHash
-
                 && (table[hash] == DeletedEntry.getUniqueDeletedEntry() || table[hash] != null
-
                 && table[hash].getKey() != key)) {
 
             if (initialHash == -1)
-
                 initialHash = hash;
 
             hash = (hash + 1) % tableSize;
-
         }
 
         if (hash != initialHash && table[hash] != null)
-
             table[hash] = DeletedEntry.getUniqueDeletedEntry();
-
     }
-
 }
