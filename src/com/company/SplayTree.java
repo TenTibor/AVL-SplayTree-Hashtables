@@ -43,7 +43,7 @@ public class SplayTree {
     }
 
     private Node searchTreeHelper(Node node, String key) {
-        if (node == null || key == node.data.getName()) {
+        if (node == null || key.equals(node.data.getName())) {
             return node;
         }
 

@@ -9,25 +9,25 @@ public class Main {
     public static void main(String[] args) throws IOException {
         ArrayList<Person> importedItems = getItemFromCsvFile("test100k");
 
-        System.out.println("====================");
+        System.out.println("=====================================");
         System.out.println("Trees: AVL");
         AVL AVL = new AVL();
         AVLInsertItems(AVL, importedItems);
         AVLSearchItems(AVL, importedItems);
 
-        System.out.println("====================");
+        System.out.println("=====================================");
         System.out.println("Trees: Splay Tree");
         SplayTree splayTree = new SplayTree();
         splayTreeInsertItems(splayTree, importedItems);
         splayTreeSearchItems(splayTree, importedItems);
 
-        System.out.println("====================");
+        System.out.println("=====================================");
         System.out.println("Hashtable: Chaining");
         Chaining chaining = new Chaining(importedItems.size());
         chainingInsertItems(chaining, importedItems);
         chainingSearchItems(chaining, importedItems);
 
-        System.out.println("====================");
+        System.out.println("=====================================");
         System.out.println("Hashtable: Open addressing");
         Addressing<String, Person> addressing = new Addressing<>(importedItems.size());
         addressingInsertItems(addressing, importedItems);
@@ -37,7 +37,7 @@ public class Main {
     public static ArrayList<Person> getItemFromCsvFile(String fileName) throws IOException {
         BufferedReader reader = new BufferedReader(new FileReader("src/com/company/tests/" + fileName + ".csv"));
         String line;
-        ArrayList<Person> allNodes = new ArrayList<Person>();
+        ArrayList<Person> allNodes = new ArrayList<>();
         while ((line = reader.readLine()) != null) {
             String[] data = line.split(",");
             Person newNode = new Person(data[0], Integer.parseInt(data[1]));
@@ -68,9 +68,9 @@ public class Main {
         // Search any item in range
         int foundItems = 0;
         int searchedItems = 0;
-        for (int i = 0; i < items.size(); i++) {
+        for (Person item : items) {
             searchedItems++;
-            if (tree.findItem(items.get(i).name, tree.root)) foundItems++;
+            if (tree.findItem(item.name, tree.root)) foundItems++;
         }
         long timeFinished = System.currentTimeMillis();
         System.out.println(foundItems + "(/" + searchedItems + ") items was found in: " + (timeFinished - timeStarted) + " ms");
@@ -89,15 +89,16 @@ public class Main {
     }
 
     // search many items in Splay Tree
-    public static void splayTreeSearchItems(SplayTree avl, ArrayList<Person> items) {
+    public static void splayTreeSearchItems(SplayTree tree, ArrayList<Person> items) {
         long timeStarted = System.currentTimeMillis();
 
         // Search any item in range
         int foundItems = 0;
         int searchedItems = 0;
-        for (int i = 0; i < items.size(); i++) {
+        for (Person item : items) {
             searchedItems++;
-            if (avl.searchTree(items.get(i).name) != null) foundItems++;
+            if (tree.searchTree(item.name) != null) foundItems++;
+            else System.out.println(item.name);
         }
         long timeFinished = System.currentTimeMillis();
         System.out.println(foundItems + "(/" + searchedItems + ") items was found in: " + (timeFinished - timeStarted) + " ms");
@@ -120,9 +121,9 @@ public class Main {
         long timeStarted = System.currentTimeMillis();
         int searchedItems = 0;
         int foundItems = 0;
-        for (int i = 0; i < importedItems.size(); i++) {
+        for (Person importedItem : importedItems) {
             searchedItems++;
-            String searchedName = importedItems.get(i).name;
+            String searchedName = importedItem.name;
             if (table.get(searchedName).getName().equals(searchedName)) foundItems++;
         }
         long timeFinished = System.currentTimeMillis();
@@ -134,9 +135,9 @@ public class Main {
         long timeStarted = System.currentTimeMillis();
         int searchedItems = 0;
         int foundItems = 0;
-        for (int i = 0; i < importedItems.size(); i++) {
+        for (Person importedItem : importedItems) {
             searchedItems++;
-            String searchedName = importedItems.get(i).name;
+            String searchedName = importedItem.name;
             if (table.get(searchedName) == null) continue;
             if (table.get(searchedName).getName().equals(searchedName)) foundItems++;
         }
@@ -147,6 +148,7 @@ public class Main {
     // add many items to taken implementation
     public static void addressingInsertItems(Addressing<String, Person> table, ArrayList<Person> importedItems) {
         long timeStarted = System.currentTimeMillis();
+
         for (Person thisPerson : importedItems) {
             table.put(thisPerson.getName(), new Person(thisPerson.getName(), thisPerson.getAge()));
         }
