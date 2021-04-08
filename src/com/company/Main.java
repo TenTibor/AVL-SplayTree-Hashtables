@@ -66,7 +66,7 @@ public class Main {
         long timeStarted = System.currentTimeMillis();
         int searchedItems = 0;
         int foundItems = 0;
-        for (int i = 0; i < importedItems.size(); i += 2) {
+        for (int i = 0; i < importedItems.size(); i ++) {
             searchedItems++;
             String searchedName = importedItems.get(i).name;
             if (table.get(searchedName).getName().equals(searchedName)) foundItems++;
@@ -94,7 +94,7 @@ public class Main {
         long timeStarted = System.currentTimeMillis();
         int searchedItems = 0;
         int foundItems = 0;
-        for (int i = 0; i < importedItems.size(); i += 2) {
+        for (int i = 0; i < importedItems.size(); i ++) {
             searchedItems++;
             String searchedName = importedItems.get(i).name;
             if (table.get(searchedName) == null) continue;
