@@ -2,6 +2,7 @@ package com.company;
 
 //    Zdroj
 //    https://www.algolist.net/Data_structures/Hash_table/Open_addressing
+
 public class AddressingHashtable<K, V> {
     private int tableSize = 0;
 
@@ -13,9 +14,7 @@ public class AddressingHashtable<K, V> {
 
         for (int i = 0; i < tableSize; i++)
             table[i] = null;
-
     }
-
 
     public Person get(String key) {
 

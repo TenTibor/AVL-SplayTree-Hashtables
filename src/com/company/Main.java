@@ -10,24 +10,19 @@ public class Main {
         ArrayList<Person> importedItems = getItemFromCsvFile("test100k");
 
         System.out.println("====================");
-        System.out.println("AVL: Moja implementácia");
+        System.out.println("Trees: AVL");
         MyAVL myAVL = new MyAVL();
         myAVL.addItemsToTree(importedItems);
         AVLSearchManyItems(myAVL, importedItems);
 
         System.out.println("====================");
-        System.out.println("Hashovanie: Moja implementácia");
+        System.out.println("Hashtable: Chaining");
         MyHashTable myHashTable = new MyHashTable(importedItems.size());
         myHashTable.addManyItems(importedItems);
         hashTableSearchManyItems(myHashTable, importedItems);
 
         System.out.println("====================");
-        System.out.println("Hashovanie: Cudzia implementácia");
-//        Hashtable<String, Person> hashtable = importItemsFromFile(importedItems);
-//        takenHashTableSearchManyItems(hashtable, importedItems);
-//        AddressingHashtable<String,Person> addressingHashtable = new AddressingHashtable<>(100000);
-//        AddressingHashtable<String,Person> addressingHashtable = new AddressingHashtable<>(100000);
-//        addressingHashtable.put("hello", new Person("kokot", 421));
+        System.out.println("Hashtable: Open addressing");
         AddressingHashtable<String, Person> addressingHashtable = importItemsFromFile(importedItems);
         takenHashTableSearchManyItems(addressingHashtable, importedItems);
 
