@@ -11,9 +11,9 @@ public class Main {
 
         System.out.println("=====================================");
         System.out.println("Trees: AVL");
-        AVL AVL = new AVL();
-        AVLInsertItems(AVL, importedItems);
-        AVLSearchItems(AVL, importedItems);
+        AVL avl = new AVL();
+        AVLInsertItems(avl, importedItems);
+        AVLSearchItems(avl, importedItems);
 
         System.out.println("=====================================");
         System.out.println("Trees: Splay Tree");

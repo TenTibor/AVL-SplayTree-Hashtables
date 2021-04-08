@@ -12,12 +12,14 @@ public class Chaining {
     }
 
     public int hash(String key) {
-        int finalHash = key.length();
-        for (int i = 0; i < key.length(); i++) {
-            finalHash = finalHash * key.charAt(0) + key.charAt(i) + i * finalHash;
-        }
+//        int finalHash = key.length();
+//        for (int i = 0; i < key.length(); i++) {
+//            finalHash = finalHash * 31 + key.charAt(i) * key.substring(0, i).hashCode();
+////            finalHash = finalHash + key.charAt(i);
+//        }
+//        System.out.println(key.hashCode());
 
-        return Math.abs(finalHash % size);
+        return Math.abs(key.hashCode() % size);
     }
 
     public void insert(String name, int age) {
@@ -60,6 +62,8 @@ public class Chaining {
         ChainingNode[] oldData = hashTable;
         ChainingNode[] newHashTable = new ChainingNode[size];
         this.hashTable = newHashTable;
+        usedIndexes = 0;
+        itemsInChain = 0;
 
         for (ChainingNode item : oldData) {
             if (item != null) {
