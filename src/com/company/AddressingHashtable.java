@@ -8,7 +8,7 @@ public class AddressingHashtable<K, V> {
 
 
     AddressingHashtable(int size) {
-        tableSize = size;
+        tableSize = (int) (size + (size * 0.2));
         table = new HashEntry[tableSize];
 
         for (int i = 0; i < tableSize; i++)
