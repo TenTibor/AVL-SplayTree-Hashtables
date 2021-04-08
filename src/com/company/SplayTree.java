@@ -1,5 +1,7 @@
 package com.company;
 
+// https://algorithmtutor.com/Data-Structures/Tree/Splay-Trees/
+
 class Node {
     Person data; // holds the key
     Node parent; // pointer to the parent
