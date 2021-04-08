@@ -1,6 +1,6 @@
 package com.company;
 
-//    Zdroj
+//    Source
 //    https://www.algolist.net/Data_structures/Hash_table/Open_addressing
 
 public class Addressing<K, V> {
