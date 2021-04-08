@@ -6,17 +6,7 @@ import java.util.ArrayList;
 public class MyAVL {
     NodeForAVL root = null;
 
-    public void addItemsToTree(ArrayList<Person> items) throws IOException {
-        long timeStarted = System.currentTimeMillis();
-        NodeForAVL root = null;
-        for (Person thisNode : items) {
-            root = addItem(root, new NodeForAVL(thisNode.name, thisNode.age));
-        }
 
-        long timeFinished = System.currentTimeMillis();
-        System.out.println(items.size() + " items was added in " + (timeFinished - timeStarted) + " ms");
-        this.root = root;
-    }
 
     public NodeForAVL addItem(NodeForAVL addTo, NodeForAVL addThis) {
         if (addTo == null)

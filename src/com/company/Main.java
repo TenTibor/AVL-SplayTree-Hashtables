@@ -12,8 +12,14 @@ public class Main {
         System.out.println("====================");
         System.out.println("Trees: AVL");
         MyAVL myAVL = new MyAVL();
-        myAVL.addItemsToTree(importedItems);
+        insertItemsToAVL(myAVL, importedItems);
         AVLSearchManyItems(myAVL, importedItems);
+
+        System.out.println("====================");
+        System.out.println("Trees: Splay Tree");
+        SplayTree splayTree = new SplayTree();
+        insertItemsToSplayTree(splayTree, importedItems);
+        SplayTreeSearchManyItems(splayTree, importedItems);
 
         System.out.println("====================");
         System.out.println("Hashtable: Chaining");
@@ -41,6 +47,20 @@ public class Main {
         return allNodes;
     }
 
+    // insert many items to AVL
+    public static void insertItemsToAVL(MyAVL myAVL, ArrayList<Person> items) throws IOException {
+        long timeStarted = System.currentTimeMillis();
+
+        NodeForAVL root = null;
+        for (Person thisNode : items) {
+            root = myAVL.addItem(root, new NodeForAVL(thisNode.name, thisNode.age));
+        }
+
+        long timeFinished = System.currentTimeMillis();
+        System.out.println(items.size() + " items was added in " + (timeFinished - timeStarted) + " ms");
+        myAVL.root = root;
+    }
+
     // search many items in AVL
     public static void AVLSearchManyItems(MyAVL avl, ArrayList<Person> items) {
         long timeStarted = System.currentTimeMillis();
@@ -56,12 +76,39 @@ public class Main {
         System.out.println(foundItems + "(/" + searchedItems + ") items was found in: " + (timeFinished - timeStarted) + " ms");
     }
 
+    // insert many items to SplayTree
+    public static void insertItemsToSplayTree(SplayTree myAVL, ArrayList<Person> items) throws IOException {
+        long timeStarted = System.currentTimeMillis();
+
+        for (Person thisNode : items) {
+            myAVL.insert(new Person(thisNode.name, thisNode.age));
+        }
+
+        long timeFinished = System.currentTimeMillis();
+        System.out.println(items.size() + " items was added in " + (timeFinished - timeStarted) + " ms");
+    }
+
+    // search many items in Splay Tree
+    public static void SplayTreeSearchManyItems(SplayTree avl, ArrayList<Person> items) {
+        long timeStarted = System.currentTimeMillis();
+
+        // Search any item in range
+        int foundItems = 0;
+        int searchedItems = 0;
+        for (int i = 0; i < items.size(); i++) {
+            searchedItems++;
+            if (avl.searchTree(items.get(i).name) != null) foundItems++;
+        }
+        long timeFinished = System.currentTimeMillis();
+        System.out.println(foundItems + "(/" + searchedItems + ") items was found in: " + (timeFinished - timeStarted) + " ms");
+    }
+
     // search many items in my hashtable
     public static void hashTableSearchManyItems(MyHashTable table, ArrayList<Person> importedItems) {
         long timeStarted = System.currentTimeMillis();
         int searchedItems = 0;
         int foundItems = 0;
-        for (int i = 0; i < importedItems.size(); i ++) {
+        for (int i = 0; i < importedItems.size(); i++) {
             searchedItems++;
             String searchedName = importedItems.get(i).name;
             if (table.get(searchedName).getName().equals(searchedName)) foundItems++;
@@ -89,7 +136,7 @@ public class Main {
         long timeStarted = System.currentTimeMillis();
         int searchedItems = 0;
         int foundItems = 0;
-        for (int i = 0; i < importedItems.size(); i ++) {
+        for (int i = 0; i < importedItems.size(); i++) {
             searchedItems++;
             String searchedName = importedItems.get(i).name;
             if (table.get(searchedName) == null) continue;
