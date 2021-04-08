@@ -169,6 +169,7 @@ public class SplayTree {
         if (t == null) {
             return s;
         }
+
         Node x = maximum(s);
         splay(x);
         x.right = t;

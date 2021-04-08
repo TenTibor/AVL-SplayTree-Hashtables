@@ -48,7 +48,7 @@ public class Main {
     }
 
     // insert many items to AVL
-    public static void AVLInsertItems(AVL AVL, ArrayList<Person> items) throws IOException {
+    public static void AVLInsertItems(AVL AVL, ArrayList<Person> items) {
         long timeStarted = System.currentTimeMillis();
 
         NodeForAVL root = null;
@@ -62,26 +62,26 @@ public class Main {
     }
 
     // search many items in AVL
-    public static void AVLSearchItems(AVL avl, ArrayList<Person> items) {
+    public static void AVLSearchItems(AVL tree, ArrayList<Person> items) {
         long timeStarted = System.currentTimeMillis();
 
         // Search any item in range
         int foundItems = 0;
         int searchedItems = 0;
-        for (int i = 0; i < items.size(); i += 2) {
+        for (int i = 0; i < items.size(); i++) {
             searchedItems++;
-            if (avl.findItem(items.get(i).name, avl.root)) foundItems++;
+            if (tree.findItem(items.get(i).name, tree.root)) foundItems++;
         }
         long timeFinished = System.currentTimeMillis();
         System.out.println(foundItems + "(/" + searchedItems + ") items was found in: " + (timeFinished - timeStarted) + " ms");
     }
 
     // insert many items to SplayTree
-    public static void splayTreeInsertItems(SplayTree myAVL, ArrayList<Person> items) throws IOException {
+    public static void splayTreeInsertItems(SplayTree tree, ArrayList<Person> items) {
         long timeStarted = System.currentTimeMillis();
 
         for (Person thisNode : items) {
-            myAVL.insert(new Person(thisNode.name, thisNode.age));
+            tree.insert(new Person(thisNode.name, thisNode.age));
         }
 
         long timeFinished = System.currentTimeMillis();
