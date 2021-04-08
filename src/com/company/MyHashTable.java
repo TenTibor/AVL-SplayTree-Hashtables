@@ -14,13 +14,10 @@ public class MyHashTable {
     }
 
     public int hash(String key) {
-        // Calculate hash by sum of letters.. But modulo size for staying in list capacity
         int finalHash = key.length();
         for (int i = 0; i < key.length(); i++) {
-//            finalHash = finalHash + key.charAt(i);
             finalHash = finalHash * key.charAt(0) + key.charAt(i) + i * finalHash;
         }
-//        System.out.println(Math.abs11(finalHash % size));
 
         return Math.abs(finalHash % size);
     }

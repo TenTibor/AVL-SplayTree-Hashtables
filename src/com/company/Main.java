@@ -4,7 +4,6 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Hashtable;
 
 public class Main {
     public static void main(String[] args) throws IOException {
@@ -24,8 +23,13 @@ public class Main {
 
         System.out.println("====================");
         System.out.println("Hashovanie: Cudzia implementácia");
-        Hashtable<String, Person> hashtable = importItemsFromFile(importedItems);
-        takenHashTableSearchManyItems(hashtable, importedItems);
+//        Hashtable<String, Person> hashtable = importItemsFromFile(importedItems);
+//        takenHashTableSearchManyItems(hashtable, importedItems);
+//        AddressingHashtable<String,Person> addressingHashtable = new AddressingHashtable<>(100000);
+//        AddressingHashtable<String,Person> addressingHashtable = new AddressingHashtable<>(100000);
+//        addressingHashtable.put("hello", new Person("kokot", 421));
+        AddressingHashtable<String, Person> addressingHashtable = importItemsFromFile(importedItems);
+        takenHashTableSearchManyItems(addressingHashtable, importedItems);
 
     }
 
@@ -72,8 +76,8 @@ public class Main {
     }
 
     // add many items to taken implementation
-    public static Hashtable<String, Person> importItemsFromFile(ArrayList<Person> importedItems) {
-        Hashtable<String, Person> hashtable = new Hashtable<>();
+    public static AddressingHashtable<String, Person> importItemsFromFile(ArrayList<Person> importedItems) {
+        AddressingHashtable<String, Person> hashtable = new AddressingHashtable<>();
 
         long timeStarted = System.currentTimeMillis();
         for (Person thisPerson : importedItems)
@@ -85,15 +89,15 @@ public class Main {
     }
 
     // search many items in taken implementation
-
-    private static void takenHashTableSearchManyItems(Hashtable<String, Person> hashtable, ArrayList<Person> importedItems) {
+    private static void takenHashTableSearchManyItems(AddressingHashtable<String, Person> table, ArrayList<Person> importedItems) {
         long timeStarted = System.currentTimeMillis();
         int searchedItems = 0;
         int foundItems = 0;
         for (int i = 0; i < importedItems.size(); i += 2) {
             searchedItems++;
             String searchedName = importedItems.get(i).name;
-            if (hashtable.get(searchedName).getName().equals(searchedName)) foundItems++;
+            if (table.get(searchedName) == null) continue;
+            if (table.get(searchedName).getName().equals(searchedName)) foundItems++;
         }
         long timeFinished = System.currentTimeMillis();
         System.out.println("(" + foundItems + "/" + searchedItems + ") items was found in: " + (timeFinished - timeStarted) + " ms");
