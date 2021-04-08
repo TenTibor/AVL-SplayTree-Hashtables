@@ -17,7 +17,7 @@ public class Main {
 
         System.out.println("====================");
         System.out.println("Hashovanie: Moja implementácia");
-        MyHashTable myHashTable = new MyHashTable(100000);
+        MyHashTable myHashTable = new MyHashTable(importedItems.size());
         myHashTable.addManyItems(importedItems);
         hashTableSearchManyItems(myHashTable, importedItems);
 
@@ -77,11 +77,12 @@ public class Main {
 
     // add many items to taken implementation
     public static AddressingHashtable<String, Person> importItemsFromFile(ArrayList<Person> importedItems) {
-        AddressingHashtable<String, Person> hashtable = new AddressingHashtable<>();
+        AddressingHashtable<String, Person> hashtable = new AddressingHashtable<>(importedItems.size());
 
         long timeStarted = System.currentTimeMillis();
-        for (Person thisPerson : importedItems)
+        for (Person thisPerson : importedItems) {
             hashtable.put(thisPerson.getName(), new Person(thisPerson.getName(), thisPerson.getAge()));
+        }
 
         long timeFinished = System.currentTimeMillis();
         System.out.println(importedItems.size() + " items was added in: " + (timeFinished - timeStarted) + " ms");

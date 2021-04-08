@@ -1,17 +1,17 @@
 package com.company;
 
 public class AddressingHashtable<K, V> {
-    private final static int TABLE_SIZE = 120000;
+    private int tableSize = 0;
 //    https://www.algolist.net/Data_structures/Hash_table/Open_addressing
 
     HashEntry[] table;
 
 
-    AddressingHashtable() {
+    AddressingHashtable(int size) {
+        tableSize = size;
+        table = new HashEntry[tableSize];
 
-        table = new HashEntry[TABLE_SIZE];
-
-        for (int i = 0; i < TABLE_SIZE; i++)
+        for (int i = 0; i < tableSize; i++)
 
             table[i] = null;
 
@@ -20,7 +20,7 @@ public class AddressingHashtable<K, V> {
 
     public Person get(String key) {
 
-        int hash = (h(key) % TABLE_SIZE);
+        int hash = (h(key) % tableSize);
 
         int initialHash = -1;
 
@@ -31,7 +31,7 @@ public class AddressingHashtable<K, V> {
             if (initialHash == -1)
                 initialHash = hash;
 
-            hash = (hash + 1) % TABLE_SIZE;
+            hash = (hash + 1) % tableSize;
         }
 
         if (table[hash] == null || hash == initialHash)
@@ -47,20 +47,19 @@ public class AddressingHashtable<K, V> {
     public int h(String key) {
         int finalHash = key.length();
         for (int i = 0; i < key.length(); i++) {
-            finalHash = finalHash + key.charAt(i);
+            finalHash = finalHash * key.charAt(0) + key.charAt(i) + i * finalHash;
         }
 
-        return finalHash;
+        return Math.abs(finalHash);
     }
 
     public void put(String key, Person value) {
 
-        int hash = (h(key) % TABLE_SIZE);
+        int hash = (h(key) % tableSize);
 
         int initialHash = -1;
 
         int indexOfDeletedEntry = -1;
-
         while (hash != initialHash
 
                 && (table[hash] == DeletedEntry.getUniqueDeletedEntry() || table[hash] != null
@@ -75,10 +74,8 @@ public class AddressingHashtable<K, V> {
 
                 indexOfDeletedEntry = hash;
 
-            hash = (hash + 1) % TABLE_SIZE;
-
+            hash = (hash + 1) % tableSize;
         }
-
         if ((table[hash] == null || hash == initialHash)
 
                 && indexOfDeletedEntry != -1)
@@ -102,7 +99,7 @@ public class AddressingHashtable<K, V> {
 
     public void remove(String key) {
 
-        int hash = (h(key) % TABLE_SIZE);
+        int hash = (h(key) % tableSize);
 
         int initialHash = -1;
 
@@ -116,7 +113,7 @@ public class AddressingHashtable<K, V> {
 
                 initialHash = hash;
 
-            hash = (hash + 1) % TABLE_SIZE;
+            hash = (hash + 1) % tableSize;
 
         }
 
