@@ -29,7 +29,8 @@ public class Main {
 
         System.out.println("====================");
         System.out.println("Hashtable: Open addressing");
-        Addressing<String, Person> addressing = importItemsFromFile(importedItems);
+        Addressing<String, Person> addressing = new Addressing<>(importedItems.size());
+        addressingInsertItems(addressing, importedItems);
         addressingSearchItems(addressing, importedItems);
     }
 
@@ -144,16 +145,13 @@ public class Main {
     }
 
     // add many items to taken implementation
-    public static Addressing<String, Person> importItemsFromFile(ArrayList<Person> importedItems) {
-        Addressing<String, Person> hashtable = new Addressing<>(importedItems.size());
-
+    public static void addressingInsertItems(Addressing<String, Person> table, ArrayList<Person> importedItems) {
         long timeStarted = System.currentTimeMillis();
         for (Person thisPerson : importedItems) {
-            hashtable.put(thisPerson.getName(), new Person(thisPerson.getName(), thisPerson.getAge()));
+            table.put(thisPerson.getName(), new Person(thisPerson.getName(), thisPerson.getAge()));
         }
 
         long timeFinished = System.currentTimeMillis();
         System.out.println(importedItems.size() + " items was added in: " + (timeFinished - timeStarted) + " ms");
-        return hashtable;
     }
 }
