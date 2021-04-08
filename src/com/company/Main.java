@@ -51,9 +51,9 @@ public class Main {
     public static void AVLInsertItems(AVL AVL, ArrayList<Person> items) {
         long timeStarted = System.currentTimeMillis();
 
-        NodeForAVL root = null;
+        AVLNode root = null;
         for (Person thisNode : items) {
-            root = AVL.addItem(root, new NodeForAVL(thisNode.name, thisNode.age));
+            root = AVL.addItem(root, new AVLNode(thisNode.name, thisNode.age));
         }
 
         long timeFinished = System.currentTimeMillis();

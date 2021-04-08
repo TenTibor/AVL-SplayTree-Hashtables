@@ -2,12 +2,12 @@ package com.company;
 
 import java.util.ArrayList;
 
-public class NodeForHash {
+public class ChainingNode {
     private String name = null; // ID
     private int age = 0;
-    ArrayList<NodeForHash> chaining = new ArrayList<>();
+    ArrayList<ChainingNode> chaining = new ArrayList<>();
 
-    public NodeForHash(String name, int age) {
+    public ChainingNode(String name, int age) {
         this.name = name;
         this.age = age;
     }

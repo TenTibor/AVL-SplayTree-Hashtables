@@ -1,9 +1,9 @@
 package com.company;
 
 public class AVL {
-    NodeForAVL root = null;
+    AVLNode root = null;
 
-    public NodeForAVL addItem(NodeForAVL addTo, NodeForAVL addThis) {
+    public AVLNode addItem(AVLNode addTo, AVLNode addThis) {
         if (addTo == null)
             addTo = addThis;
 
@@ -16,7 +16,7 @@ public class AVL {
         return addTo.rebalanced();
     }
 
-    public boolean findItem(String findThisName, NodeForAVL findHere) {
+    public boolean findItem(String findThisName, AVLNode findHere) {
         boolean found = false;
         if (findHere.getName().equals(findThisName)) found = true;
 
@@ -36,7 +36,7 @@ public class AVL {
         System.out.println("===========================");
     }
 
-    public int printNode(NodeForAVL thisNode, int count) {
+    public int printNode(AVLNode thisNode, int count) {
         if (thisNode != null) {
             count++;
             System.out.println(thisNode.getName() + "(" + thisNode.balance + "/" + thisNode.getDepth() + ")=> " + (thisNode.left != null ? thisNode.left.getName() : "-") + "/" + (thisNode.right != null ? thisNode.right.getName() : "-"));

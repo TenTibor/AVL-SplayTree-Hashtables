@@ -1,14 +1,14 @@
 package com.company;
 
 public class Chaining {
-    NodeForHash[] hashTable;
+    ChainingNode[] hashTable;
     int size = 0;
     int usedIndexes = 0;
     int itemsInChain = 0;
 
     public Chaining(int size) {
         this.size = size;
-        hashTable = new NodeForHash[size];
+        hashTable = new ChainingNode[size];
     }
 
     public int hash(String key) {
@@ -23,7 +23,7 @@ public class Chaining {
     public void insert(String name, int age) {
         int index = hash(name);
         if (hashTable[index] == null) {
-            hashTable[index] = new NodeForHash(name, age);
+            hashTable[index] = new ChainingNode(name, age);
             usedIndexes++;
 
             // if we need resize
@@ -31,16 +31,16 @@ public class Chaining {
                 resizeTable();
         } else if (!hashTable[index].getName().equals(name)) {
             // Check if items is not exist in chain
-            for (NodeForHash item : hashTable[index].chaining) {
+            for (ChainingNode item : hashTable[index].chaining) {
                 if (item.getName().equals(name)) return;
             }
             itemsInChain++;
-            hashTable[index].chaining.add(new NodeForHash(name, age));
+            hashTable[index].chaining.add(new ChainingNode(name, age));
         }
     }
 
-    public NodeForHash get(String key) {
-        NodeForHash itemOnIndex = hashTable[hash(key)];
+    public ChainingNode get(String key) {
+        ChainingNode itemOnIndex = hashTable[hash(key)];
         if (itemOnIndex == null) return null;
         if (itemOnIndex.getName().equals(key))
             return itemOnIndex;
@@ -57,11 +57,11 @@ public class Chaining {
     public void resizeTable() {
         int bonusCapacity = size / 2;
         this.size = size + bonusCapacity;
-        NodeForHash[] oldData = hashTable;
-        NodeForHash[] newHashTable = new NodeForHash[size];
+        ChainingNode[] oldData = hashTable;
+        ChainingNode[] newHashTable = new ChainingNode[size];
         this.hashTable = newHashTable;
 
-        for (NodeForHash item : oldData) {
+        for (ChainingNode item : oldData) {
             if (item != null) {
                 if (item.chaining.size() > 0) {
                     for (int i = 0; i < item.chaining.size(); i++) {
