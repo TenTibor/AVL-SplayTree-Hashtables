@@ -44,7 +44,7 @@ public class AVLNode {
         // Left and right rotation after this
         if (balance > 1 && left != null && left.balance < 0) {
             if (debug)
-                System.out.println(this.name + " need left-right rotation with: " + left.getName() + '/' + left.right.getName());
+                System.out.println(this.name + " had left-right rotation");
 
             // left rotation of left node
             left.decreaseDepth();
@@ -66,7 +66,7 @@ public class AVLNode {
 
         // Right and left rotation after this
         if (balance < -1 && right != null && right.balance > 0) {
-            if (debug) System.out.println(this.name + " need right-left rotation");
+            if (debug) System.out.println(this.name + " had right-left rotation");
 
             // left rotation of left node
             right.decreaseDepth();
@@ -88,7 +88,7 @@ public class AVLNode {
 
         // Right rotation
         if (balance > 1) {
-            if (debug) System.out.println(this.name + " need right rotation");
+            if (debug) System.out.println(this.name + " had right rotation");
 
             this.decreaseDepth(2);
             balance = 0;
@@ -101,7 +101,7 @@ public class AVLNode {
 
         // Left rotation
         if (balance < -1) {
-            if (debug) System.out.println(this.name + " need left rotation");
+            if (debug) System.out.println(this.name + " had left rotation");
 
             this.decreaseDepth(2);
             balance = 0;

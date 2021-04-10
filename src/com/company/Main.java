@@ -112,6 +112,8 @@ public class Main {
         }
         long timeFinished = System.currentTimeMillis();
         System.out.println(importedItems.size() + " items was added in: " + (timeFinished - timeStarted) + " ms");
+        System.out.println("Unique keys: " + chaining.usedIndexes);
+        System.out.println("Duplicated keys: " + chaining.itemsInChain);
     }
 
     // search many items in chaining hashtable
