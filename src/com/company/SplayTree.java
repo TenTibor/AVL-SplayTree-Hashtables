@@ -3,28 +3,14 @@ package com.company;
 // Source
 // https://algorithmtutor.com/Data-Structures/Tree/Splay-Trees/
 
-class Node {
-    Person data; // holds the key
-    Node parent; // pointer to the parent
-    Node left; // pointer to left child
-    Node right; // pointer to right child
-
-    public Node(Person data) {
-        this.data = data;
-        this.parent = null;
-        this.left = null;
-        this.right = null;
-    }
-}
-
 public class SplayTree {
-    private Node root;
+    private SplayTreeNode root;
 
     public SplayTree() {
         root = null;
     }
 
-    private void printHelper(Node currPtr, String indent, boolean last) {
+    private void printHelper(SplayTreeNode currPtr, String indent, boolean last) {
         // print the tree structure on the screen
         if (currPtr != null) {
             System.out.print(indent);
@@ -43,7 +29,7 @@ public class SplayTree {
         }
     }
 
-    private Node searchTreeHelper(Node node, String key) {
+    private SplayTreeNode searchTreeHelper(SplayTreeNode node, String key) {
         if (node == null || key.equals(node.data.getName())) {
             return node;
         }
@@ -54,10 +40,10 @@ public class SplayTree {
         return searchTreeHelper(node.right, key);
     }
 
-    private void deleteNodeHelper(Node node, String key) {
-        Node x = null;
-        Node t = null;
-        Node s = null;
+    private void deleteNodeHelper(SplayTreeNode node, String key) {
+        SplayTreeNode x = null;
+        SplayTreeNode t = null;
+        SplayTreeNode s = null;
         while (node != null) {
             if (node.data.getName().equals(key)) {
                 x = node;
@@ -95,8 +81,8 @@ public class SplayTree {
     }
 
     // rotate left at node x
-    private void leftRotate(Node x) {
-        Node y = x.right;
+    private void leftRotate(SplayTreeNode x) {
+        SplayTreeNode y = x.right;
         x.right = y.left;
         if (y.left != null) {
             y.left.parent = x;
@@ -114,8 +100,8 @@ public class SplayTree {
     }
 
     // rotate right at node x
-    private void rightRotate(Node x) {
-        Node y = x.left;
+    private void rightRotate(SplayTreeNode x) {
+        SplayTreeNode y = x.left;
         x.left = y.right;
         if (y.right != null) {
             y.right.parent = x;
@@ -133,7 +119,7 @@ public class SplayTree {
     }
 
     // Splaying operation. It moves x to the root of the tree
-    private void splay(Node x) {
+    private void splay(SplayTreeNode x) {
         while (x.parent != null) {
             if (x.parent.parent == null) {
                 if (x == x.parent.left) {
@@ -164,7 +150,7 @@ public class SplayTree {
     }
 
     // joins two trees s and t
-    private Node join(Node s, Node t) {
+    private SplayTreeNode join(SplayTreeNode s, SplayTreeNode t) {
         if (s == null) {
             return t;
         }
@@ -173,7 +159,7 @@ public class SplayTree {
             return s;
         }
 
-        Node x = maximum(s);
+        SplayTreeNode x = maximum(s);
         splay(x);
         x.right = t;
         t.parent = x;
@@ -181,7 +167,7 @@ public class SplayTree {
     }
 
 
-    private void preOrderHelper(Node node) {
+    private void preOrderHelper(SplayTreeNode node) {
         if (node != null) {
             System.out.print(node.data + " ");
             preOrderHelper(node.left);
@@ -189,7 +175,7 @@ public class SplayTree {
         }
     }
 
-    private void inOrderHelper(Node node) {
+    private void inOrderHelper(SplayTreeNode node) {
         if (node != null) {
             inOrderHelper(node.left);
             System.out.print(node.data + " ");
@@ -197,7 +183,7 @@ public class SplayTree {
         }
     }
 
-    private void postOrderHelper(Node node) {
+    private void postOrderHelper(SplayTreeNode node) {
         if (node != null) {
             postOrderHelper(node.left);
             postOrderHelper(node.right);
@@ -225,8 +211,8 @@ public class SplayTree {
 
     // search the tree for the key k
     // and return the corresponding node
-    public Node searchTree(String k) {
-        Node x = searchTreeHelper(root, k);
+    public SplayTreeNode searchTree(String k) {
+        SplayTreeNode x = searchTreeHelper(root, k);
         if (x != null) {
             splay(x);
         }
@@ -234,7 +220,7 @@ public class SplayTree {
     }
 
     // find the node with the minimum key
-    public Node minimum(Node node) {
+    public SplayTreeNode minimum(SplayTreeNode node) {
         while (node.left != null) {
             node = node.left;
         }
@@ -242,7 +228,7 @@ public class SplayTree {
     }
 
     // find the node with the maximum key
-    public Node maximum(Node node) {
+    public SplayTreeNode maximum(SplayTreeNode node) {
         while (node.right != null) {
             node = node.right;
         }
@@ -250,7 +236,7 @@ public class SplayTree {
     }
 
     // find the successor of a given node
-    public Node successor(Node x) {
+    public SplayTreeNode successor(SplayTreeNode x) {
         // if the right subtree is not null,
         // the successor is the leftmost node in the
         // right subtree
@@ -260,7 +246,7 @@ public class SplayTree {
 
         // else it is the lowest ancestor of x whose
         // left child is also an ancestor of x.
-        Node y = x.parent;
+        SplayTreeNode y = x.parent;
         while (y != null && x == y.right) {
             x = y;
             y = y.parent;
@@ -269,7 +255,7 @@ public class SplayTree {
     }
 
     // find the predecessor of a given node
-    public Node predecessor(Node x) {
+    public SplayTreeNode predecessor(SplayTreeNode x) {
         // if the left subtree is not null,
         // the predecessor is the rightmost node in the
         // left subtree
@@ -277,7 +263,7 @@ public class SplayTree {
             return maximum(x.left);
         }
 
-        Node y = x.parent;
+        SplayTreeNode y = x.parent;
         while (y != null && x == y.left) {
             x = y;
             y = y.parent;
@@ -288,9 +274,9 @@ public class SplayTree {
 
     // insert the key to the tree in its appropriate position
     public void insert(Person key) {
-        Node node = new Node(key);
-        Node y = null;
-        Node x = this.root;
+        SplayTreeNode node = new SplayTreeNode(key);
+        SplayTreeNode y = null;
+        SplayTreeNode x = this.root;
 
         while (x != null) {
             y = x;
