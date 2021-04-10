@@ -15,29 +15,29 @@ public class Chaining {
 //        int finalHash = key.length();
 //        for (int i = 0; i < key.length(); i++) {
 //            finalHash = finalHash * 31 + key.charAt(i) * key.substring(0, i).hashCode();
-////            finalHash = finalHash + key.charAt(i);
+//              finalHash = finalHash + key.charAt(i);
 //        }
 //        System.out.println(key.hashCode());
 
         return Math.abs(key.hashCode() % size);
     }
 
-    public void insert(String name, int age) {
-        int index = hash(name);
+    public void insert(String key, Person person) {
+        int index = hash(key);
         if (hashTable[index] == null) {
-            hashTable[index] = new ChainingNode(name, age);
+            hashTable[index] = new ChainingNode(person.getName(), person.getAge());
             usedIndexes++;
 
             // if we need resize
             if (usedIndexes > size / 2)
                 resizeTable();
-        } else if (!hashTable[index].getName().equals(name)) {
+        } else if (!hashTable[index].getName().equals(key)) {
             // Check if items is not exist in chain
             for (ChainingNode item : hashTable[index].chaining) {
-                if (item.getName().equals(name)) return;
+                if (item.getName().equals(key)) return;
             }
             itemsInChain++;
-            hashTable[index].chaining.add(new ChainingNode(name, age));
+            hashTable[index].chaining.add(new ChainingNode(person.getName(), person.getAge()));
         }
     }
 
@@ -69,10 +69,10 @@ public class Chaining {
             if (item != null) {
                 if (item.chaining.size() > 0) {
                     for (int i = 0; i < item.chaining.size(); i++) {
-                        insert(item.chaining.get(i).getName(), item.chaining.get(i).getAge());
+                        insert(item.chaining.get(i).getName(), new Person(item.chaining.get(i).getName(), item.chaining.get(i).getAge()));
                     }
                 }
-                insert(item.getName(), item.getAge());
+                insert(item.getName(), new Person(item.getName(), item.getAge()));
             }
         }
     }

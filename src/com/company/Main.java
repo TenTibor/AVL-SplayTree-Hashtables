@@ -108,7 +108,7 @@ public class Main {
     public static void chainingInsertItems(Chaining chaining, ArrayList<Person> importedItems) {
         long timeStarted = System.currentTimeMillis();
         for (Person thisPerson : importedItems) {
-            chaining.insert(thisPerson.name, thisPerson.age);
+            chaining.insert(thisPerson.name, thisPerson);
         }
         long timeFinished = System.currentTimeMillis();
         System.out.println(importedItems.size() + " items was added in: " + (timeFinished - timeStarted) + " ms");
