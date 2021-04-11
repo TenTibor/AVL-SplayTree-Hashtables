@@ -11,9 +11,11 @@ public class AVLNode {
     AVLNode left = null;
     AVLNode right = null;
 
-    // just for testing purpose
+    // just for testing purpose.
+    // set true to see rotation
     boolean debug = false;
 
+    // Return node with bigger depth
     public AVLNode getBiggerItem() {
         if (this.right == null) {
             if (this.left == null) {
@@ -30,6 +32,7 @@ public class AVLNode {
             return this.left;
     }
 
+    // set new balance and depth
     public AVLNode rebalanced() {
         // Refresh depth
         AVLNode biggerNode = this.getBiggerItem();
@@ -41,12 +44,12 @@ public class AVLNode {
         if (left != null) balance += left.depth;
         if (right != null) balance -= right.depth;
 
-        // Left and right rotation after this
+        // Left rotation before right rotation
         if (balance > 1 && left != null && left.balance < 0) {
             if (debug)
                 System.out.println(this.name + " had left-right rotation");
 
-            // left rotation of left node
+            // change depth of switched nodes
             left.decreaseDepth();
             left.right.increaseDepth();
 
@@ -64,11 +67,11 @@ public class AVLNode {
             left.right = bottomRight;
         }
 
-        // Right and left rotation after this
+        // Right rotation before left rotation
         if (balance < -1 && right != null && right.balance > 0) {
             if (debug) System.out.println(this.name + " had right-left rotation");
 
-            // left rotation of left node
+            // change depth of switched nodes
             right.decreaseDepth();
             right.left.increaseDepth();
 
@@ -132,10 +135,12 @@ public class AVLNode {
         this.depth++;
     }
 
+    // decrease depth by one
     public void decreaseDepth() {
         this.depth--;
     }
 
+    // decrease depth more times
     public void decreaseDepth(int times) {
         this.depth = this.depth - times;
     }

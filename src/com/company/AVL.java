@@ -1,25 +1,31 @@
 package com.company;
 
 public class AVL {
-    AVLNode root = null;
+    AVLNode root = null; // root of the tree
 
+    // Recursive function to adding new node
     public AVLNode addItem(AVLNode addTo, AVLNode addThis) {
-        if (addTo == null)
+        if (addTo == null) // insert if node is free
             addTo = addThis;
 
+            // Choose right or left side by name difference
         else if (addTo.getName().compareTo(addThis.getName()) < 0) {
             addTo.right = addItem(addTo.right, addThis);
         } else if (addTo.getName().compareTo(addThis.getName()) > 0) {
             addTo.left = addItem(addTo.left, addThis);
         }
 
+        // return rebalanced node
         return addTo.rebalanced();
     }
 
+    // Recursive function to find node
     public boolean findItem(String findThisName, AVLNode findHere) {
         boolean found = false;
-        if (findHere.getName().equals(findThisName)) found = true;
+        if (findHere.getName().equals(findThisName))
+            found = true;
 
+            // Choose right or left side by name difference
         else if (findHere.getName().compareTo(findThisName) < 0 && findHere.getRight() != null) {
             found = findItem(findThisName, findHere.getRight());
         } else if (findHere.getName().compareTo(findThisName) > 0 && findHere.getLeft() != null) {
@@ -29,6 +35,7 @@ public class AVL {
         return found;
     }
 
+    // print all nodes
     public void printTree() {
         System.out.println("---------------------------");
         int rootCount = printNode(this.root, 0);
@@ -36,6 +43,7 @@ public class AVL {
         System.out.println("===========================");
     }
 
+    // print one node
     public int printNode(AVLNode thisNode, int count) {
         if (thisNode != null) {
             count++;

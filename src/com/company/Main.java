@@ -7,8 +7,11 @@ import java.util.ArrayList;
 
 public class Main {
     public static void main(String[] args) throws IOException {
+
+        // Load all records from CVS file.. All files are in directory "tests"
         ArrayList<Person> importedItems = getItemFromCsvFile("test100k");
 
+        // Start tests for all implementations
         System.out.println("=====================================");
         System.out.println("Trees: AVL");
         AVL avl = new AVL();
