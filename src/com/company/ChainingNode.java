@@ -12,6 +12,7 @@ public class ChainingNode {
         this.age = age;
     }
 
+    // print name and age of item
     public void print() {
         System.out.println("[" + name + ", " + age + "]");
     }
