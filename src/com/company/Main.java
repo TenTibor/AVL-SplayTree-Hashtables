@@ -9,7 +9,7 @@ public class Main {
     public static void main(String[] args) throws IOException {
 
         // Load all records from CVS file.. All files are in directory "tests"
-        ArrayList<Person> importedItems = getItemFromCsvFile("test100k-b");
+        ArrayList<Person> importedItems = getItemsFromCsvFile("test100k");
 
         // Start tests for all implementations
         System.out.println("=====================================");
@@ -37,7 +37,7 @@ public class Main {
         addressingSearchItems(addressing, importedItems);
     }
 
-    public static ArrayList<Person> getItemFromCsvFile(String fileName) throws IOException {
+    public static ArrayList<Person> getItemsFromCsvFile(String fileName) throws IOException {
         BufferedReader reader = new BufferedReader(new FileReader("src/com/company/tests/" + fileName + ".csv"));
         String line;
         ArrayList<Person> allNodes = new ArrayList<>();
