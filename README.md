@@ -1,7 +1,7 @@
-# **Opis zadania**
-Zadanie bolo zamerané na vyhľadávanie v dynamických množinách. Obsiahol som štyri implementácie. Moje vlastné implementácie sú AVL stromy a hash tabuľka s kolíziami riešenými cez chaining.
+# **Opis programu**
+Program vyhľadáva rôznymi metódamy v dynamických množinách. Obsiahol som štyri implementácie. Moje vlastné implementácie sú AVL stromy a hash tabuľka s kolíziami riešenými cez chaining.
 
-Zadanie je naprogramované v jazyku Java. Všetky implementácie sú ako samostatné triedy a majú vlastné uzly v ďalšej triede.
+Program je naprogramované v jazyku Java. Všetky implementácie sú ako samostatné triedy a majú vlastné uzly v ďalšej triede.
 
 V hlavnej triede „main“ sú funkcie pre všetky testy. Testy sú na vzorke 100 tisíc záznamov, ale pre možnosti testovania je vzoriek viac a pre vyskúšanie iných záznamov stačí zmeniť názov súboru hneď na prvom riadku v súbore main.
 ## **Obsiahnuté implementácie**
